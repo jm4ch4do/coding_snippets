@@ -1,0 +1,250 @@
+/* SQL (Structured Query Language) */
+
+/*........................................EXAMPLES........................................*/
+    -- JOIN with AS
+    SELECT b.starttime, f.name
+    FROM cd.bookings AS b
+    JOIN cd.facilities AS f 
+    ON b.facid = f.facid
+    WHERE DATE(b.starttime) = DATE('2012-09-21')
+    AND name LIKE 'Tennis%'
+    ORDER BY b.starttime
+
+/*........................................SELECT........................................*/
+-- SELECT may also be select, and the ; at the end is not mandatory
+SELECT column_name FROM table_name;
+SELECT * FROM actor;
+SELECT first_name, last_name FROM actor;
+
+/*-----DISTINCT-----*/
+    SELECT DISTINCT column FROM table_name;  /*return unique values*/
+    SELECT DISTINCT(column) FROM table;
+    SELECT DISTINCT(release_year) FROM film;
+
+/*-----COUNT-----*/
+    SELECT COUNT(name) FROM table;
+    SELECT COUNT(*) FROM table;  -- both count the number of rows in table
+    SELECT COUNT(DISTINCT(colors)) FROM clo
+
+/*-----WHERE-----*/
+    SELECT column1, column2 FROM table WHERE conditions;
+    -- operators = > < >= <=    <> !=   AND OR NOT
+    SELECT * FROM customer WHERE first_name = 'Jared';
+
+    -- how many films meet criteria
+    SELECT COUNT(title) FROM film WHERE rental_rate > 4 AND replacement_cost >=19.99 AND rating='R';
+
+/*-----ORDER BY-----*/ 
+    -- order always comes last in the query except for LIMIT
+    SELECT column_1 FROM table ORDER BY column_1 ASC/DESC
+    SELECT store_id, first_name, last_name FROM customer ORDER BY store_id DESC, first_name ASC
+
+
+/*-----LIMIT-----*/
+    -- Limit is always last in a query
+    SELECT * FROM payment ORDER BY payment_date DESC LIMIT 5;
+
+/*-----BETWEEN-----*/
+    -- does not include the edges
+    SELECT COUNT(*) FROM payment WHERE amount BETWEEN 8 AND 9;
+    SELECT * FROM payment WHERE payment_date BETWEEN '2007-02-01' AND '2007-02-15'
+
+/*-----IN-----*/
+    SELECT color FROM table WHERE color IN('red', 'blue')
+    SELECT color FROM table WHERE color NOT IN('green', 'yellow')
+
+/*-----LIKE-----*/
+    -- % matches sequence of characters    _ matches one character    ILIKE case insensitive 
+    SELECT * FROM customer WHERE first_name LIKE 'J%' AND last_name LIKE 'S%'
+
+.
+.
+/*........................................GROUP BY........................................*/
+/* GROUP BY is an aggregate function which means it takes multiple inputs and combines them
+   to produce a single output */
+
+/*-----COMMON AGGREGATE FUNCTIONS-----*/ 
+    AVG()    COUNT()    MAX()    MIN()    SUM()    DATE()
+    SELECT MIN(replacement_cost) FROM film;
+    SELECT ROUND(AVG(replacement_cost), 2) FROM film;
+
+
+/*-----GROUP BY-----*/ 
+    /*you need to select a category funcion which is something that repeats in the dataset and 
+    can be used to perform summaries in groups of data*/
+    SELECT category_col, AVG(data_col) FROM table GROUP BY category_col;
+
+    -- using WHERE only makes sense if selecting or ignoring some categories
+    SELECT category_col, AVG(data_col) FROM table WHERE category_col != 'A' GROUP BY category_col;
+    SELECT company, division, SUM(sales) FROM finance_table WHERE division IN ('marketing', 'transport')
+            GROUP BY company, division;
+    SELECT company, SUM(sales) FROM finance_table GROUP BY company ORDER BY SUM(sales)
+    SELECT customer_id, SUM(amount) FROM payment GROUP BY customer_id ORDER BY SUM(amount) DESC ;
+    SELECT DATE(payment_date) FROM payment GROUP BY DATE(payment_date)
+
+/*-----HAVING-----*/
+    -- having allow us to filter for the field being aggregated. It's used after the GROUP BY
+    SELECT company, SUM(sales)
+    FROM finance_table
+    WHERE company != 'Google'  -- filtering without AGG
+    GROUP BY company
+    HAVING SUM(sales) > 1000  -- filtering value beign AGG
+
+.
+.
+/*........................................JOINS........................................*/
+/*-----AS-----*/
+    -- For Aliases
+    SELECT SUM(amount) AS net_revenue FROM payment;
+    -- Aliases cannot be used in HAVING since they are asigned when the query finishes
+    SELECT customer_id, SUM(amount) AS total_spent 
+    FROM payment GROUP BY customer_id HAVING SUM(amount) > 100
+
+/*-----INNER JOIN-----*/
+    -- An inner join provides records which appear in two tables
+    SELECT * FROM tableA INNER JOIN tableB ON tableA.col_match = tableB.col_match
+    -- for example, you may use it for verifying who came from the registered students
+    SELECT reg_id, Logins.name, log_id FROM Registrations INNER JOIN Logins ON Registrations.name = Logins.name
+                /* | table name must be specified only when the field exists in both tables */ 
+    JOIN = INNER JOIN -- This is just a shortcut but is best to use INNER JOIN 
+
+    SELECT payment_id, payment.customer_id, first_name
+    FROM payment
+    INNER JOIN customer
+    ON payment.customer_id = customer.customer_id;
+
+/*-----OUTER JOIN-----*/
+    -- Outer joins deal with values that are not in both tables
+    -- FULL OUTER JOIN gets all info from both tables, matching and not maching
+    SELECT * FROM Registrations 
+    FULL OUTER JOIN Logins 
+    ON Registrations.name = Logins.name;
+
+    -- FULL OUTER JOIN + WHERE allows you to supress the INNER JOIN part
+    SELECT * FROM Registrations 
+    FULL OUTER JOIN Logins 
+    ON Registrations.name = Logins.name;
+    WHERE Registrations.reg_id IS null OR Logins.log_id IS null
+
+/*-----LEFT JOIN-----*/
+    -- LEFT OUTER JOIN only gets results results from the first specified table
+    SELECT * FROM tableA
+    LEFT OUTER JOIN tableB
+    ON tableA.col_match = tableB.col_match;
+    -- You can also use WHERE to filter out matching results and get only not matching for table A
+    SELECT * FROM tableA
+    LEFT OUTER JOIN tableB
+    ON tableA.col_match = tableB.col_match
+    WHERE tableB. is is null
+
+    -- Example: show films we don't have in inventory
+    SELECT film.film_id, title, inventory_id, store_id
+    FROM film
+    LEFT JOIN inventory ON inventory.film_id = film.film_id
+    WHERE inventory.film_id IS NULL
+
+/*-----RIGHT JOIN-----*/
+    SELECT * FROM tableA
+    RIGHT OUTER JOIN tableB
+    ON tableA.col_match = tableB.col_match
+
+    -- RIGHT JOIN only for table B
+    SELECT * FROM tableA
+    RIGHT OUTER JOIN tableB
+    ON tableA.col_match = tableB.col_match
+    WHERE tableA.id is null
+
+/*-----UNION-----*/
+    -- Combines two queries on top of each other
+    SELECT column1 FROM table1
+    UNION
+    SELECT column2 FROM table2
+
+
+/*-----DOUBLE JOIN-----*/
+    -- Is very common to make a double join with joint tables --
+    SELECT title, first_name, last_name
+    FROM film_actor
+    JOIN actor ON film_actor.actor_id = actor.actor_id
+    JOIN film ON film_actor.film_id = film.film_id
+    WHERE first_name = 'Nick'
+    AND last_name = 'Wahlberg'
+
+/*-----SELF JOIN-----*/
+    -- you are force to use alias to differenciate between tables 
+    -- given that you use the same table twice
+    SELECT tableA.col, tableB.col
+    FROM table AS tableA
+    JOIN table AS tableB ON
+    tableA.some_col = tableB.other_col
+.
+.
+/*........................................ADVANCED........................................*/
+/*-----BASIC-----*/
+    -- Data Types*/ TIME    DATE    TIMESTAMP    TIMESTAMPTZ /* Contains date, time and timezone
+    -- Functions*/ TIMEZONE    NOW()    TIMEOFDAY   CURRENT_TIME    CURRENT_DATE
+
+    SHOW ALL             -- Show all database parameters 
+    SHOW TIMEZONE        -- Shows TIMEZONE parameter
+    SELECT NOW()         -- Executes now function which returns current timestamp with time zone
+    SELECT TIMEOFDAY     -- Same info but in letters like Thu Mar 19 14:23:26.524055 2020 EDT 
+    SELECT CURRENT_DATE  -- Just current date
+
+/*-----EXTRACT()-----*/
+    YEAR MONTH DAY WEEK QUARTER TO_CHAR AGE
+    EXTRACT(date_col)
+    TO_CHAR(date_col, 'mm-dd,yyyy')
+
+    SELECT EXTRACT(YEAR FROM payment_date) AS year
+    FROM payment
+
+    SELECT AGE(payment_date)
+    FROM payment
+
+    SELECT TO_CHAR(payment_date, 'MONTH-YYYY') AS birhdayMonth
+    FROM payment
+
+    -- Get payments made on monday
+    SELECT TO_CHAR(payment_date, 'Day') AS payment_week_day
+    FROM payment
+    WHERE extract(dow from payment_date) = 1
+
+/*-----MATH-----*/
+    + - * / % ^ -- and many others just check online docs
+
+/*-----STRING-----*/
+    string || string --concatenation
+    length('jose')
+
+    SELECT first_name || ' ' || last_name
+    FROM customer
+
+/*-----SUBQUERY-----*/
+    -- allows two perform one query inside another
+
+    -- example: get students with grades higher than average
+    SELECT student, grades
+    FROM test_scores
+    WHERE grade > (SELECT AVG(grade) FROM test_scores)
+
+    -- example: show grades for honored students
+    SELECT student, grade
+    FROM test_scores
+    WHERE student IN
+    (SELECT student FROM honor_roll_table)
+
+    -- example: EXIST for checking if subquery exists
+    -- get all customers with at least one payment higher than 11
+    -- you may either check EXIST or NOT EXIST to check opposite criteria
+    SELECT first_name, last_name
+    FROM customer AS c
+    WHERE EXISTS(
+        SELECT * 
+        FROM payment as p
+        WHERE p.customer_id = c.customer_id
+            AND amount > 11
+    )
+.
+.
+
+

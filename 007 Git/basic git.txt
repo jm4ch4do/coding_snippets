@@ -1,0 +1,211 @@
+# ------------------------------ BASICS ------------------------------ #
+GIT - Version Control System (VCS)
+https://git-scm.com/docs            # docs on every git command
+
+git log --oneline
+
+# ------------------------------ INSTALL ------------------------------ #
+git --version
+
+# set username and email for all future work
+git config --global user.name "Jose Machado" 
+git config --global user.email m4ch4do@protonmail.com 
+
+# get username
+git config user.name
+git config user.email
+
+
+# ------------------------------ REPO  ------------------------------ #
+# ini empty repository and check status
+git init
+git status
+
+
+
+# ------------------------------ COMMIT CHANGES  ------------------------------ #
+Working Directory | Staging Area | Repository
+        ^- git add -^       ^- git commit -^
+
+# move files to staging area
+git add file1 file2 file3 ...
+git add .                         # moves pending all files
+
+# will open default editor to provide commit message
+git commit
+
+# to avoid opening editor
+git commit -m "commit message with explanation of changes"
+
+# log info about every commit
+git log
+git lob --oneline  # better display
+
+# commits can be amended to fix errors but only for the last commit
+# using --amend. It's just another commit but using --amend
+git commit -m 'some comment'
+git commit -am 'some comment'  # adds all unstaged changes
+git add forgotten_file
+git commit --amend
+
+
+# ------------------------------ IGNORE  ------------------------------ #
+/.git       # stores git information
+/.gitignore # stores the files to be ignore such as passwords, apikeys...
+            # inside the file we use patterns to indicate what to ignore
+
+.DS_Store    # will ignore files named .DS_Store (Mac system files)
+folderName/  # will ignore and entire Directory
+*.log        # will ignore any files with the .log extension
+
+# gitignore templates for different languages
+https://www.toptal.com/developers/gitignore
+
+
+# ------------------------------ BRANCHING ------------------------------ #
+# main branch for project (from 2020 in github is main, but in git is still master)
+master  
+
+# HEAD points to the branch of your last commit
+HEAD
+
+git branch                 # shows all branches
+git branch -v              # shows verbose (more info)
+git branch branch_name     # create new branch
+git branch -d branch_name  # deletes match
+git branch -D branch_name  # forces delete even if is not merged
+git branch -m branch_name  # rename branch
+git branch -r              # shows remote branches (origin/master)
+
+git switch branch_name     # select a new branch
+git switch -c branch_name  # create and switch branch
+git checkout branch_name   # select a new branch and also many other things
+                           # it was the old way of switching
+
+
+# ------------------------------ MERGING ------------------------------ #
+# We merge branches, not specific commits
+# We merge to where HEAD is 
+git switch master
+git merge bugfix
+
+# fast forward commit is the simplest type
+# is where master moves forward to update from another branch
+# no commit is made
+
+# if the master branch had any commit after my branch was created
+# then is no fast forward and when mergin there it will be a new commit
+# called "merge commit". This is the second simplest type of merge
+
+# If there are conflict between the current Master and my branch then
+# we need to solve the conflicts before moving forward
+
+
+# ------------------------------ DIFF ------------------------------ #
+git diff     # shows all changes that are not staged for the next commit
+             # meaning it compares working directory with staging area
+git diff HEAD     # to see differences beetween commmited and staged 
+                  # or unstageed
+
+git diff --staged  # changes between commited and staged
+git diff --cached  # same as previous
+
+git diff HEAD [filename]
+git diff --staged [filename]
+
+git diff branch1 branch2
+git diff commit1 commit2  # you must provide commit hashs
+                          # obtained with git log --oneline
+
+
+# ------------------------------ STASHING ------------------------------ #
+# staging is used to save current changes without commiting or moving to
+# stage area. This is usefull if you need to switch branches and not done
+# editing. If you don't stage, chances may come with you to the new branch
+# or conflicts may rise when switching
+git stash       # save staged and unstaged changes into stash
+git stash save  # same as previous
+
+git stash pop   # retrieves changes from stash into working directory
+
+git stash apply  # apply what's stashed without removing it from stash
+                 # useful to apply changes in several branches
+
+# you may use several stash to save several things and then pop one at the time
+git stash list  # shows list of elements in the stash
+git stash apply stash@{2}  # apply stash number 2
+git stash drop stash@{2}
+
+git stash clear  # will clear everything from the stash
+
+
+# --------------------- UNDOING AND TIME TRAVELING -------------------- #
+# changes HEAD position to previous commit (detach HEAD)
+# you can't apply changes to old commits
+git checkout 4f1bce4
+
+# you may also refer to a number of commits in the past
+git checkout HEAD~3  # move HEAD three steps back
+
+# reattach HEAD
+git switch master    # use name of current branch
+git switch -         # same as previous
+
+# dettaching the HEAD is useful when creating a new branch from a
+# commit in the past
+git checkout 4f1bce4
+git switch -c new_branch_name
+
+# erase changes in a file back to last commit
+git checkout HEAD <file>
+git checkout -- <file>
+
+
+# ----- RESTORE ----- #
+# is another alternative to checkout same as git switch
+git restore file_name  # restore file to last commit
+git checkout HEAD dog.txt  # equivalent to the previous
+
+# restore back file one commit back
+git restore --source HEAD~1 app.js  `
+
+# restore everything to current commit
+git restore .
+
+# reverse from stage to working directory
+# if you mistakenly staged a file you can unstaged with restore
+git restore --staged file_name
+
+
+# ----- RESET ----- #
+# resets the branch back to an specific commit
+# after reset changes are still there but there are not commmited
+# the changes remain in the working directory
+git reset 4661ab9
+# so, to delete changes you can stash them and delete stash
+# but more often you want those changes in another branch
+# so create new branch and commit
+git switch -c new_branch_name
+git commit -m "add new changes"
+
+# hard reset will delete everything back to selected commit
+# and you'll loose changes also in working directory
+git reset --hard commit_hash
+# or to go 2 commits back
+git reset HEAD~2
+
+# git reset undos the history of commits so it's not recommended
+# to be executed on remote repos because history should remain consistent
+# when working with a team
+
+# ----- RESTORE ----- #
+# same as reset but it preserves history. It will create a new commit with
+# the file of the previously selected commit, instead of rolling back to
+# the previous commit. So mistakes will not be lost
+git revert c958161 
+git revert HEAD~2
+
+# ------------------------------ COMMANDS ------------------------------ #
+config    init    status    add    commit    log    ignore   branch    switch
+merge     diff    stash
+

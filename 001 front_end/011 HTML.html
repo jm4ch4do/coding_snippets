@@ -1,0 +1,121 @@
+<!-- ................ BASIC TEMPLATE ................ -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Title of Top Browser</title>
+	</head>
+	<body>
+
+	</body>
+</html>
+
+
+<!-- .............. INTERNET RESOURCES .............. -->
+www.w3schools.com
+https://developer.mozilla.org
+
+<!-- ................... TEXT TAGS ................... -->
+<h1>Big Title</h1>
+<h6>Small Title</h6>
+<p>This is a Parragraph</p>
+<p>This is another Parragraph
+   And this goes to the same parragraph
+</p>
+
+<!-- ................. FORMAT TAGS .................. -->
+<!-- old format -->
+<p><b> Bold Text</b></p>
+<p><i> Italic Text</i></p>
+<!-- new format -->
+<p><strong> Bold Text</strong></p>
+<p><em> Italic Text</em></p>
+
+<!-- ......... ORDERER and UNORDERED LISTS .......... -->
+<!-- ordered list -->
+<ol>
+	<li>First Item</li>
+	<li>Second Item</li>
+	<li>Third Item</li>
+</ol>
+
+<!-- unordered list -->
+<ul>
+	<li>First Item</li>
+	<li>Second Item</li>
+	<li>Third Item</li>
+</ul>
+
+<!-- nested list -->
+<ol>
+	<li>Item One</li>
+	<li>Item Two</li>
+	<ul>
+		<li>Nested List</li>
+		<li>Another Nested</li>
+	</ul>
+</ol>
+
+<!-- ................ DIV AND SPAN .................. -->
+<div class="myClass">
+	<h1>Big Title in myClass</h1>
+	<p>This is a <span>Parragraph</span> in myClass</p>
+</div>
+
+<!-- ................... TABLES ..................... -->
+<table border="1">
+	<thead> <!-- names of fields (optional) -->
+		<th>Number</th>
+		<th>Color</th>
+		<th>Country</th>
+	</thead>
+	<tr> <!-- table row -->
+		<td>250</td>
+		<td>Blue</td>
+		<td>USA</td>
+	</tr>
+	<tr> <!-- table row -->
+		<td>350</td>
+		<td>Red</td>
+		<td>Cuba</td>
+	</tr>
+</table>
+
+<!-- .................... FORMS ..................... -->
+<!-- action is the address which will handle the request -->
+<form class="" action="index.html" method="post">
+
+	<label>
+		Enter Text:
+		<input type="text">
+	</label>
+
+	<label for="userInput">Label for all</label>
+		<input id="userInput" type="text">
+
+	<input type="text" name="var_name" value="value_in_var">
+	<input type="text" name="var_name" placeholder="erasesOnClick">
+	<input type="email"> <!-- verifies text is email -->
+	<input type="password" required> <!-- shows **** and forces not empty -->
+	<input type="color"> <!-- for seleting color -->
+
+
+	<!-- RADIO BOTON -->
+	<!-- name=loc radios with equal name can not be selected at the same time -->
+	<label for="in">Inside: </label>
+	<input id= "in" type="radio" name="loc" value="inside">
+	<label for="out">Outside: </label>
+	<input id= "out" type="radio" name="loc" value="outside">
+
+	<!-- sELECTION BOTON -->
+	<option value="3">Great</option>
+	<option value="2">Okay</option>
+	<option value="1">Bad</option>
+
+	<textarea type="myTextBig" rows="8" cols="80"></textarea>
+
+	<!-- submits everything inside form tags -->
+	<input type="submit" value="Text in Boton">
+
+</form>

@@ -1,0 +1,250 @@
+Rem  .Change promt
+export PS1="\u >"
+
+Rem BASICS AND HELP
+command -option arguments
+ncal -3hjM  Rem options can be placed together
+date --universal  Rem some options have long format version but not all of them
+date -u
+ncal -A 1  Rem S ome commands require arguments if using an specific option. 
+           Rem This example is print one month after
+ncal -M -A1 -B1 july 1969  Rem long example with all included
+
+help command  Rem can be used for built-in commands such as "cd" that doesn't have man pages
+man command   Rem manual of some command. q-quit f(or space)-forward b-back 
+              Rem h-help /patter-searchForward ?pattern-searchBackWards
+man 1 passwd  Rem is the standard man page for command passwd (section1)
+man 5 passwd  Rem is the file formats and convention page (section 5)
+              Rem it will tell you where and how passwords are stored
+
+type command  Rem tells you the type of the command. Could be binary (executable)
+              Rem Built-in Shell or Alias.
+which command Rem where command is located (usually in a file)
+
+Rem -----------------------------------------------------------------------------------------
+Rem NAVIGATION
+Rem Folder Structure
+Rem                 / (the_root)
+Rem bin    home    root   dev   var
+Rem                 | (root_subdirectory)
+
+xdg-open / Rem run it on local computer to access the / directory in the graphical interphase
+xdg-open ~ Rem same for home directory
+pwd    Rem print working directory
+
+ls -l Rem longFormat (shows permissions)
+   -a Rem all (shows also hidden files)
+   -h Rem Human format (shows MB and GB instead of B)
+
+Rem -----------------------------------------------------------------------------------------
+Rem CREATING FILES AND FOLDERS
+touch  Rem creates file, may create several, update modification time if file is created.
+touch "my website"
+touch my\ website
+file   Rem determines fileType. Even if you change the '.pdf' at the end it will perform test
+       Rem to find the true fileType
+mkdir  Rem make directory
+mkdir -p folder1/folder2/folder3 Rem create parents as needed 
+nano   Rem Text Editor
+       ^S Save    M-U(Alt-U) Undo    M-E Redo    ^W    Search   ^Alt-4 ajusteDeLinea 
+rm -r  Rem for deleting recursively
+mv source... destination
+
+
+Rem -----------------------------------------------------------------------------------------
+Rem SHORTCUTS
+^L clear    ^T swap letters or characters
+^history    ^history | less        !1307  uses command in line 1307 of the history    ^r search in history
+
+
+Rem -----------------------------------------------------------------------------------------
+Rem WORKING WITH FILES
+ln -s myBook.txt myBookLink  Rem symlink is equivalent to a shortcut in Windows
+cat   Rem concatenates and prints content
+tac   Rem prints in the reverse order
+less  Rem read content page by page
+head  Rem print first 10 lines
+head -n 5 countries  Rem print first 5 lines of file countries
+head -20 countries
+tail  Rem same but last lines
+tail -f  Rem show last lines but keep updating if file changes
+wc    Rem number of lines, words and characters  -l only number of lines      -w only number of words 
+sort  Rem sorts alphabetically  -n numerical sort  -r reverse  -u unique
+sort -n k2 prices.text  Rem sorts numericaly file prices.txt using column 2
+
+
+Rem -----------------------------------------------------------------------------------------
+Rem REDIRECTION
+standard input -> command -> standard output
+                          -> standard error
+
+date > mydate.txt   Rem (redirect) erases any info from mydate.txt and replaces it with the ouput of date
+date >> mydate.txt  Rem (append) writes at the end of the file without deleting previous information
+cat < mytext.txt    Rem prints text but this time mytext.txt is not an argument but provided as standard input
+                    Rem functions such as cat and sort accept standard input if no pars are provided
+cat < original.txt > output.txt
+
+ls my_file 2> errorlog.txt  Rem if an error occurs, it will save it details in errorlog.txt.
+                            Rem an error could be my_file not existing
+ls my_file 2>> errorlog.txt 
+
+ls -l > output.txt 2> output.txt  Rem the three lines do the same
+ls -l > output.txt 2>&1
+ls -l &> output.txt
+
+Rem piping is like redirecting but for commands
+command 1 | command 2
+ls -l /usr/bin | less
+
+Rem piping to tr (tr process standard output and alters the text)
+cat msg.txt | tr s S  Rem change every s for S
+cat msg.txt | tr a-z A-Z  Rem set to upper-case
+cat msg.txt | tr -d a-z  Rem delete all lower-case letters
+cat msg.txt | tr -d [:alpha:]  Rem delete all letters (uses character clases)
+cat msg.txt | tr -d [:alpha:] | tr -d :  Rem delete also :
+cat msg.txt | tr -d [:alpha:] | tr -d : | tr -d [:blank:] Rem also blank spaces
+
+Rem tee is like a T pipe with one input and two outputs. 
+Rem Saves result in a file and also passes it to a command
+command1 | tee file.txt | command2
+Rem the previous is equivalent to this two lines:
+command1 > file.txt
+file.txt | command2
+
+
+Rem WILDCARDS
+Rem -----------------------------------------------------------------------------------------
+ls *.html  Rem zero or more characters (any html file)
+ls *  Rem Any file in the current folder
+?  Rem one character
+ls [A-F]*  Rem cualquier letra entre A y F y luego cualquier cosa
+ls app[132].css  Rem matches app1.css app2.css app3.css
+ls app[^0-9].css  Rem ^ is negate so it matches appA.css but not app1.css or any other number
+ls ~  Rem my home
+ls ~jose  Rem jose's home
+touch app{1,2,3}  Rem will create app1, app2, app3
+touch app{Mon, Tue, Wed, Thu, Fri}_{AM_PM}  Rem generates 10 files: Am and PM for each weekday
+touch journal{1..365}  Rem journal for each day of the year
+touch {x, y{1..5}, z}  Rem generates x, y1,y 2, y3, y4, y5, z
+echo hello    there
+echo "hello    there $variable" Rem respects spaces and replaces variables
+echo "hello    there $variable"  Rem will print literally $variable
+echo date  Rem just prints "date"
+echo $(date)  Rem print today's date because $() indicates that it needs to be replaced
+echo `date`  Rem same as above
+
+Rem MATH
+Rem -----------------------------------------------------------------------------------------
+echo $((10+7))
+echo $((3*13))
+echo $((10/3))  Rem returns 3 without the decimals
+echo $((10%3))  Rem returns 1 
+echo $((10**3))
+
+
+Rem FIND
+Rem -----------------------------------------------------------------------------------------
+locate  Rem fast search. Creates an index of files and keeps it in a database. 
+        Rem Is not live search. It may take a while to update.
+sudo updatedb  Rem use this to update database if locate doesn't work
+locate -i *term*  -l10  Rem case insensitive and term anywhere in the word. Only 10 matches
+       -e   Rem if the file is in the database it will also check if it really exists.
+
+find  Rem find runs on the current folder if no parameters are specified
+find ~ -type f  Rem find all files in my folder
+find ~/Desktop  -size +1G  -name "*.txt"
+find -user hermione
+find -type -f -not -name "*.html"  Rem find what is not .html
+find -empty | args ls  Rem args converts Standard input into par for ls to use the par
+find -name "chapter[1-4].txt" | xargs cat > fullbook.txt
+
+grep "chicken" animals.txt  Rem search inside files
+-w  (match only exact word)     -i (case insensitive)
+
+grep -r "note" ~/Desktop  Rem -r searches in all files
+grep "love" letter.txt -ic -A3 -B3 Rem counts the amount of times "love" is in the letter
+                                   Rem And give me three lines before and after the match
+
+
+Rem PERMISSIONS
+Rem -----------------------------------------------------------------------------------------
+ls -lah  Rem will show permissions
+
+chmod  Rem change permissions
+- remover per    + add per    = set per and remove others
+r read           w write      x executable
+u user           g group      o others                      a all
+
+chmod a-w file.txt  Rem remove write permission from all
+chmod u+x file.txt  Rem add execute permission for user who owns the file
+chmod a=r file.txt  Rem all user will only have read permission
+chmod 755 file.txt  Rem changes to 111 101 101
+
+sudo useradd -m username  Rem adds new user -m for also creating his home folder
+sudo usermod -G -a newgroup user  Rem add user to secondary group. 
+                                  Rem One user may belong to many secundary groups and only 
+                                  Rem one primary groups (us -g for primary) 
+sudo userdel -r newuser  Rem remove user. May use -f to force deleting an logged user
+                         Rem although it may be dangerous because it may leave the system with no users
+
+chown jose file.txt      Rem change owner of file.txt to jose
+chown :admins file.txt   Rem change group owner to admins
+
+
+Rem VARIABLES
+Rem -----------------------------------------------------------------------------------------
+printenv  Rem prints environment variables (all of them)
+echo $USER  Rem prints current user $ is expansion for variables
+echo $PWD
+
+animal=rabbit
+echo $animal   Rem this creates a shell variable which does not appear when using printenv
+export animal  Rem will turn animal into an envirement variable 
+
+echo $PATH  Rem path is an environment variable which stores the folders were the system 
+            Rem will look for executables to run files
+
+Rem to make the script available anywhere as a command we'll need to update path
+mkdir ~/bin
+touch ~/bin/myCommand
+PATH="$HOME/bin"$PATH"
+
+
+Rem SCRIPTING & CRON
+Rem -----------------------------------------------------------------------------------------
+#!//bin/bash  # tells the system which program to use to read file
+
+echo testText > testFile.txt
+
+Rem run file
+bash hi
+
+
+crontab -e
+minute hour day month dayOfWeek command
+* any value    5,6 list of values    1-4 range of values    */5 step values (every 5)
+
+30 * * * * command  Rem run when clock gets to 30 min no matter the hour or day
+0 0 * * * commnad   Rem run every midnight
+30 6 * * * command  Rem every monday 6h30am
+
+Rem use website crontab.guru to make cron time calculations
+
+
+
+Rem USED COMMANDS
+Rem -----------------------------------------------------------------------------------------
+echo    man    cal    ncal   date   clear    cp    passwd    type    which    cd    pwd    ls
+touch   mkdir  nano   rm     mv     cat      less  tac       head    tail     wc    sort   tr
+|       >      <      >>     *      ?        ~     []        {}      locate   find  exec   xargs
+grep    whoami ln     chmod  alias  apt                                                    printenv
+
+
+
+
+
+
+
+
+
+

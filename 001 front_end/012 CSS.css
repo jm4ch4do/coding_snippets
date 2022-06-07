@@ -1,0 +1,51 @@
+/* ................. LINKING CSS FILE ................. */
+<head>
+	<title>CSS Basics</title>
+	<link rel="stylesheet" href="/css/master.css"></title>
+<head>
+
+/* ................... BASIC FORMAT ................... */
+selectedtag{
+	property: value;
+}
+
+h1{   /* refering a tag */
+	color: blue;
+	color: rgb(8,84,1);
+}
+
+div{
+	background: red;
+	border-color: blue;
+	border-width: 4px;
+	border-style: double;
+}
+
+/* ................. IDS AND CLASSES .................. */
+/* use . for classes */
+.myDivs{
+	color: blue;
+}
+
+#uniqueDiv{
+	color: green;
+}
+
+/* ................. OTHER SELECTORS .................. */
+*{ /* change color of everything (not common) */
+	color: green;
+}
+
+/* adyacent selector */
+h3 + ul {  /* any ul next to an h3 */
+	color: green;
+}
+
+/* descending selector */
+li a{  /* all a inside ul */
+	color: green;
+}
+
+li a["www.eicma.cu"]{  /* only applies to a specific link */
+	color: green;
+}

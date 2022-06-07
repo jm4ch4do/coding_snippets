@@ -1,0 +1,79 @@
+
+
+" ---------------------- MONTAR PÁGINA EN DEBIAN 9, PHP7,MYSQL ------------------------- "
+# crear entrada en el DNS
+
+# mysql and MariaDB
+apt install postgresql
+
+# php
+apt install php php-pgsql libapache2-mod-php
+apt -y install php php-cgi libapache2-mod-php php-common php-pear php-mbstring php-gettext
+
+# apache
+apt install apache2
+
+# testing
+nano /var/www/html/test.php
+   <?php phpinfo(); ?>
+
+# entrar a localhost para ver apache y a localhost/test.php para comprobar php
+
+# establecer la zona horaria correcta
+nano /etc/php/7.0/apache2/php.ini
+  date.timezone = "America/Havana"
+service apache2 restart
+
+#  crear nuevo usuario con privilegios full para usar en la interfaz web de phpmyadmin
+su postgres
+psql
+  ALTER USER postgres PASSWORD 'postgres';
+\q
+
+exit
+
+# activar módulo apache(activar urls limpias)
+a2enmod rewrite
+
+# para permitir subir archivos grandes
+nano /etc/php/7.0/apache2/php.ini
+  upload_max_filesize = 20M
+  post_max_size = 30M # siempre mayor que el anterior
+reboot
+
+# con phpmyadmin crear un usuario con privilegios sólo para la base de datos de la web
+# crear base de datos e importar las tablas con phpmyadmin
+
+# dar permisos para la carpeta de los sitios web
+chmod -R 0777 /var/www/
+
+# copiar el sitio en /var/www usando winscp
+
+# crear el virtual host para el nuevo sitio
+nano /etc/apache2/sites-available/www.new.minag.gob.cu.conf
+<VirtualHost *:80>
+
+        ServerName new.minag.gob.cu
+        ServerAlias www.new.minag.gob.cu
+
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html/www.new.minag.gob.cu
+
+
+        <Directory /var/www/html/www.new.minag.gob.cu>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride All
+                Require all granted
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+# habilitar el sitio
+a2ensite www.new.minaa2g.gob.cu.conf # habilitar nuevo sitio
+a2dissite 000-default.conf # deshabilitar sitio por defecto
+ls /etc/apache2/sites-enabled/ # comprobar que el sitio
+
+service apache2 restart

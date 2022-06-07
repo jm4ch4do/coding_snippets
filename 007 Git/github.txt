@@ -1,0 +1,156 @@
+# ------------------------------ ERRORS ------------------------------ #
+# problem
+fatal: Unable to create 'C:/zPROG/000 coding_snippets/005 Git/Repos/newRepo/.git/index.lock': File exists.
+# solution
+rm -f .git/index.lock
+
+# ------------------------------ BASICS ------------------------------ #
+# clones a full repository into your machine
+git clone <url>
+
+
+# ------------------------------ SSH KEYS ----------------------------- #
+# for connecting without having to specify user and password everytime
+# this is done once per computer you work on
+
+# check if you have ssh keys in your computer
+ls -al ~/.ssh
+
+# create a new SSH key, using the provided email as a label (Windows)
+ssh-keygen -t ed25519 -C "m4ch4do@protonmail.com"
+
+# start the ssh-agent in the backgroun
+eval "$(ssh-agent -s)"
+> Agent pid 59566   # will return this
+
+# add your SSH private key to the ssh-agent
+ssh-add ~/.ssh/id_ed25519
+
+# copy the SSH publich key to your clipboard
+clip < ~/.ssh/id_ed25519.pub
+
+# go to github/clicProfile/Settings/Access/ssh and GPG keys
+# add new key, put a title to it and paste the contents.
+
+
+# ------------------------- UPLOAD TO GITHUB ------------------------ #
+# Option 1
+# 1. Create new repo on github
+# 2. Connect your local repo (add a remote)
+# 3. Push up your changes
+
+# Option 2
+# 1. Create new repo on github
+# 2. Clone it down to your machine
+# 3. Do some work locally and push up
+
+
+# ------------------------------ REMOTE ------------------------------ #
+git remote -v  # lists remotes in your current repo
+
+# add remote name. Usually the name is set to "origin" 
+get remote add <name> <url>   
+# example
+git remote add origin https://github.com/blah/repo.git
+
+# rename or delete remotes (not used a lot)
+git remote rename <old> <new>
+git remote remove <name>
+
+# ------------------------------ PUSH ------------------------------ #
+git push <remote> <branch>  # syntax
+git push origin master  # common example
+git push origin main  # main is the new defaul name
+
+# if branch names differ from local to remote you must specify both names
+git push origin <local-branch>:<remote-branch>
+
+# -u connects local branch to remote branch in a permanent way
+git push -u origin main  # connects local to remote main
+git push  # now you can make git push with nothing else to add
+
+
+# ------------------------- TRACKING REMOTE ------------------------- #
+# compare with remote state
+git branch -r  # view remote branches
+git checkout origin/master  # detach HEAD to master at github since last update
+
+# work on branches from origin (when you clone or pull it only copies main)
+git checkout origin/branch_name  # will work on remote branch but won't copy whole branch
+                                 # you'll be working in detached head
+
+# git will assume that we want to connect to the remote branch when you
+# try to switch to a branch that doesn't exist locally
+git switch remote_branch_name
+
+# you can also use the old syntax with checkout
+git checkout --track origin/puppies
+
+# ---------------------------- FECTH PULL ---------------------------- #
+# fecth brings changes as another branch (origin/master)
+# while you keep working on your working directory (master)
+git fetch origin  # gets all repo
+git fetch origin branch_name  # fetchs only one branch
+# you can latter make checkout to see what's different in the remote
+checkout origin/master 
+
+# fetch is also used to update new branches
+git fetch  # will default to origin
+
+# pull integrates to our working files
+git pull = git fetch + git merge
+# will update current branch using remote main
+git pull origin main
+
+# remote defaults to origin and branch to the configured tracking connection
+git pull  # so this pulls from the same branch in remote
+
+
+# -------------------------- GIT HUB CONFIG--------------------------- #
+Public/Private
+adding Collaborators
+README.md (markdown files)
+Github Gists (short tutorials)
+Github Pages (free hosted static websites)
+Pull Request (lowLevel user don't have permission to push)
+             (so the make these request so highLevel may review and pull)
+Fork (makes a clone of another repo into our account)
+    origin is the common name from the repo you forked
+    upstream is the common name to the original repo
+    When you want to contribute to a big project you work on your forked
+    and then make a pull request from your fork
+
+
+# ------------------------------ REBASE ------------------------------ #
+# Rebase is an alternative to merge
+# An is also a tool for clean-up commits
+# When you rebase you change your base, instead of merging your current
+# status with the current status of main, you change the start of your
+# branch to the current status of master, therefore rebasing your branch
+# is cleaner than merging because it doesn't add merging commmits to the 
+# history
+git switch feature_branch
+git rebase main
+
+# the big problem about rebasing is that it changes history and if
+# someone else have your branch then your history will differ from theirs
+# and that will be really hard to reconcile
+
+# ----- INTERACTIVE REBASE -----
+# Allows you to change commit, erase them or mixing several commits into one
+git rebase -i HEAD~9  # move 9 steps back to rebase commit 
+                      # shows from current commit to -9 commit
+
+pick (keep commit)    reword (change commit text)
+fixup (mix with previous and discard commit message)
+drop (erases commit)
+
+# ------------------------------ TAGS ------------------------------ #
+# Tags are used to mark version
+
+# ------------------------------ REFLOGS ------------------------------ #
+# Retrieving lost information
+# git keeps a reference log where it stores every time HEAD moved.
+# reflogs only works locally and expire after 90 days (by default)
+# if a commit was erased it will still appear on reflog
+git reflog show HEAD  # shows the log

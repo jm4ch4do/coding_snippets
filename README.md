@@ -1,2 +1,2 @@
 # coding_snippets
-Snippets for several languages
+Snippets for different languages

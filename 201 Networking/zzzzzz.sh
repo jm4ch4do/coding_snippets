@@ -1,0 +1,1 @@
+cp /etc/bind/sectorial/db.esadr.hlg.minag.cu.sectorial /etc/bind/sectorial/db.esauebn.hlg.minag.cu.sectorial
