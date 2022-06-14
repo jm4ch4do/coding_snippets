@@ -4,16 +4,17 @@
 # Selection        O(n^2)     O(n^2)    O(n^2)
 # Insertion        O(n^2)     O(n^2)    O(n) when nearly sorted
 # Shell           O(n^3/2)    O(n^3/2)  O(nlogn)  when nearly sorted
-# Merge           O(nlogn)    O(nlogn)  O(nlogn)
 # Quick Sort      O(nlogn)    O(n^2)    O(nlogn)
+# Merge           O(nlogn)    O(nlogn)  O(nlogn)
 
 # SPACE COMPLEXITY FOR SORTING ALGORITHMS
-#                 Worst     
+#                 Worst   Best  
 # Bubble           O(1)        
 # Selection        O(1)    
 # Insertion        O(1)    
+# Quick Sort       O(n)   O(logn)
 # Merge            O(n)  
-# Quick Sort      O(logn)
+
 
 # Being the two last the most used, mostly quicksort
 # all sorting algorithm can be found at: www.sorting-algorithms.com
