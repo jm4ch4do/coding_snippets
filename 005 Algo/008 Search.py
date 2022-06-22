@@ -1,3 +1,6 @@
+Sequential complexity is O(n)
+Binary sort complexity is O(logn) 
+
 #--------------------SEARCH--------------------
 # Sequential Search
 # in is used in python for searching
