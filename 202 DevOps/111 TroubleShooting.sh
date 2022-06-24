@@ -1,4 +1,4 @@
-" ------------------------TROUBLE SHOOTING------------------------- "
+"------------------------TROUBLE SHOOTING-------------------------"
 # Verify if any process is using port 80
 netstat -aon | findstr :80
 
