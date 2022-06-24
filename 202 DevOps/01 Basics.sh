@@ -1,4 +1,4 @@
-" ------------------------BASIC------------------------- "
+"------------------------BASIC-------------------------"
 # DevOps or Site Realiability Engineer
 
 # -> The basic Docker structure is Linux -> Container Engine -> Docker Container

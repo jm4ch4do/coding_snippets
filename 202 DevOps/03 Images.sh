@@ -1,9 +1,9 @@
-" ------------------------DOCKER IMAGE------------------------- "
+"------------------------DOCKER IMAGE-------------------------"
 # to create a image we first need to create a docker file and then execute the build command
 # we can also download pre-made images from dockerhub
 # then we can use run to turn the image into a container
 docker pull sotobotero/udemy-devops  # descargar imagen
-docker pull postgress # download the standard docker image
+docker pull postgress # download the standard docker postgres image
 
 
 docker image ls  # show images

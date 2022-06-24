@@ -1,5 +1,5 @@
-" ------------------------DOCKER FILE------------------------- "
-# ---------- Create New Docker Image (starting JAVA server)
+"------------------------EXAMPLE JAVA-------------------------"
+# Create New Docker Image (starting JAVA server)
 vim Dockerfile
     FROM node:12.22.1-alpine3.11  # using parent image from dockerhub
     
@@ -11,13 +11,17 @@ vim Dockerfile
 
 docker build
 
-# ---------- Example With RUN (installing programs on linux)
+
+"--------------------EXAMPLE RUN ON LINUX---------------------"
+# simple example of run
 vim Dockerfile
 FROM python:3.8-alpine
     RUN apk add --update vim  # install VIM when creating container
 docker build -t hola-python  # it creates the image
 
-# ---------- Example With CMD (startting python SERVER)
+
+"--------------------EXAMPLE CMD PYTHON---------------------"
+# CMD is used to execute a file everytime you start the container
 vim Dockerfile
     FROM python:3.8-alpine
     RUN apk add -update vim
@@ -34,7 +38,8 @@ docker run -p 8080:8080 hola-python  # creates and starts the container using po
 # now when you start the container it won't run the python server anymore
 docker run -p 8080:8080 hola-python sh
 
-# ---------- Example With ENTRYPOINT
+
+"--------------------EXAMPLE ENTRYPOINT---------------------"
 # requires an input and is not conceived to be overwritten.
 vim Dockerfile
     ...
@@ -46,12 +51,15 @@ docker run -p 8080:8080 hola-python sh
 # but this will work and execute the instructions within the file
 docker run hola-python hello.py
 
+
+"--------------------COPY & ADD---------------------"
 # ---------- COPY or ADD
 # ADD allow to pull files from remote locations
 # also ADD automatically decompresses files when moving .tar or .zip files
 
-# ---------- RECOMMENDED DOCKERFILE GOOD PRACTICES
 
+"-------RECOMMENDED DOCKERFILE GOOD PRACTICES-------"
+# some tips from a Docker Conference
 FROM debian:use_tag
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
