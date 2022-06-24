@@ -39,6 +39,15 @@ docker run -p 8080:8080 hola-python  # creates and starts the container using po
 docker run -p 8080:8080 hola-python sh
 
 
+"--------------------EXAMPLE CMD NODE---------------------"
+nano Dockerfile
+    FROM node:alpine
+    COPY . /app
+    WORKDIR /app
+    CMD node app.js
+docker build -t hello-docker .
+
+
 "--------------------EXAMPLE ENTRYPOINT---------------------"
 # requires an input and is not conceived to be overwritten.
 vim Dockerfile
@@ -59,7 +68,7 @@ docker run hola-python hello.py
 
 
 "-------RECOMMENDED DOCKERFILE GOOD PRACTICES-------"
-# some tips from a Docker Conference
+# some tips from a Docker  Conference
 FROM debian:use_tag
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \

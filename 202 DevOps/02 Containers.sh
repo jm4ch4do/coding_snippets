@@ -31,6 +31,9 @@ docker log billingapp  # see log for a given container
 docker log -f billingapp # logs allow you to slowly scroll down
 
 
+docker run -it ubuntu  # starts a new image and gets inside it
+
+
 "------------------------ENTER CONTAINER-------------------------"
 # run commands inside docker container
 docker exec 
@@ -38,6 +41,7 @@ docker exec
 # get inside
 docker exec -it f2a09f7a79bd sh  # (i)interactive session with (t)terminal and sh to open shell
                                  # you get inside the container to run commands
+
 
 
 "---------------------------ATTACH DISK---------------------------"
