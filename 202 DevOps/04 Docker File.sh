@@ -1,3 +1,7 @@
+"------------------------DOCKER FILE-------------------------"
+# Docker files are used to build images
+
+
 "------------------------EXAMPLE JAVA-------------------------"
 # Create New Docker Image (starting JAVA server)
 vim Dockerfile
