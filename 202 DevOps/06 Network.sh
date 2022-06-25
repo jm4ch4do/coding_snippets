@@ -42,6 +42,6 @@ docker inspect nginx
 
 
 "------------------------NETWORK TROUBLE SHOOTING-------------------------"
-
+docker run --name netshoot --rm -it --network my_network nicolaka/netshoot /bin/bash
 
 

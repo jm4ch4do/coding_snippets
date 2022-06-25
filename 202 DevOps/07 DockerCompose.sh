@@ -33,3 +33,15 @@ docker-compose up -d  # run file in detach mode (background)
 
 "------------------EXAMPLES WITH IPS-----------------"
 vim docker-compose.yml
+networks:
+  lan:
+    driver: mcvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: "192.168.0.0/24"
+        - gateway: "192.168.0.1"
+        
+docker-compose up -d
+        
