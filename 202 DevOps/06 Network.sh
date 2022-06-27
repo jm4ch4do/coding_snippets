@@ -12,13 +12,37 @@ docker network inspect	my-network  # Display detailed information on a host or n
 # start container inside a network
 docker run -it --network my-network nicolaka/netshoot
 
+# DNS SERVER
+# The internal DNS server for Docker always runs in the address 172.17.0.11
+
+
+"------------------------NEW NETWORK-------------------------"
+docker network create \
+    --driver bridge \
+    --subnet 182.18.0.0/16
+    my-new-network
+
 
 "------------------------DRIVERS-------------------------"
-# bridge:  the host network interface is shared with docker
+# bridge:  internal network where usually docker is 172.17.0.1 
+# and the others get .2, .3 and so on
+# you can map ports from the host machine to any container in this network
+docker run ubuntu  # is assigned by default to the Bridge Network
+
+
 # host:    every container uses your own ip address
+# now ports from ubuntu are automatically mapped to your machine
+# now you cannot have several containers working with the same port
+# since you don't have the mapping tool to switch to different ports in the localhost
+docker run ubuntu --network=host  # assign to host network
+
+# none:    containers are isolated having no access to any other container or network
+docker run ubuntu --network=none  # assign to none network
+
+
 # overlay: allows different networks to communicate
 # macvlan: allows assigning macs to containers
-# none:    deactivate the containers network
+
 
 "------------------------EXAMPLE-------------------------"
 # SQL DATABASE INSIDE NETWORK
@@ -43,5 +67,8 @@ docker inspect nginx
 
 "------------------------NETWORK TROUBLE SHOOTING-------------------------"
 docker run --name netshoot --rm -it --network my_network nicolaka/netshoot /bin/bash
+
+
+
 
 
