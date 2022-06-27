@@ -2,6 +2,19 @@
 # Docker files are used to build images
 
 
+"-----------EXAMPLE ENTRY POINT WITH DEFAULT VALUE------------"
+FROM Ubuntu
+
+ENTRYPOINT ["sleep"]
+
+CMD ["5"]
+
+
+docker ubuntu-sleeper     # uses default value
+docker ubuntu-sleeper 10  # replace default value 
+docker run --entrypoint new-command ubuntu-sleeper 10  # overwrites the entrypoint
+
+
 "------------------------EXAMPLE JAVA-------------------------"
 # Create New Docker Image (starting JAVA server)
 vim Dockerfile
@@ -13,7 +26,7 @@ vim Dockerfile
     
     CMD ["node", "/app/src/index.js"]  # execute the index.js everytime to do run on the container
 
-docker build
+docker build .
 
 
 "--------------------EXAMPLE RUN ON LINUX---------------------"
@@ -23,6 +36,19 @@ FROM python:3.8-alpine
     RUN apk add --update vim  # install VIM when creating container
 docker build -t hola-python  # it creates the image
 
+
+"--------------------EXAMPLE FLASK---------------------"
+FROM Ubuntu
+
+RUN apt-get update
+RUN apt-get install python
+
+RUN pip install flask
+RUN pip install flask-mysql
+
+COPY . /opt/source-code
+
+ENTRYPOINT FLASK_APP=/opt/source-code/app.py flask run
 
 "--------------------EXAMPLE CMD PYTHON---------------------"
 # CMD is used to execute a file everytime you start the container
@@ -65,7 +91,7 @@ docker run -p 8080:8080 hola-python sh
 docker run hola-python hello.py
 
 
-"--------------------COPY & ADD---------------------"
+"--------------------COPY & ADD---------------------" 
 # ---------- COPY or ADD
 # ADD allow to pull files from remote locations
 # also ADD automatically decompresses files when moving .tar or .zip files

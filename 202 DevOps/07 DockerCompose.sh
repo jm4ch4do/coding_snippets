@@ -31,6 +31,10 @@ services:
 docker-compose up -d  # run file in detach mode (background)
 
 
+"------------------LINKING CONTAINER-----------------"
+docker run -d --name=clickcounter --link redis:redis -p 8085:5000 kodekloud/click-counter
+
+
 "------------------EXAMPLES WITH IPS-----------------"
 vim docker-compose.yml
 networks:

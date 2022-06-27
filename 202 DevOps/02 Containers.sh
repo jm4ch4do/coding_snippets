@@ -1,6 +1,8 @@
 "------------------------LIST CONTAINERS-------------------------"
 docker ps -a  # show all docker containers that ran recently
 docker ps  # all container that are running right now
+docker inspect my-container  # shows info on a specific container
+docker ps --size  # print also size of each container
 
 
 "----------------------------DELETE-------------------------------"
@@ -42,9 +44,24 @@ docker exec
 docker exec -it f2a09f7a79bd sh  # (i)interactive session with (t)terminal and sh to open shell
                                  # you get inside the container to run commands
 
+docker attack my-container  # allows you to see the container outputs in your own terminal  
 
 
 "---------------------------ATTACH DISK---------------------------"
 # saving app database and files to local disk instead of inside the container
 docker run -d -v /Users/kbs/ejemplo-docker/app/etc:/etc/todos -p 3000:3000 getting-started
                  # local file location             # folder inside docker
+                 
+#another example
+docker run -v /opt/datadir:/var/lib/mysql mysql
+
+
+"----------------------ENVIRONMENT VARIABLES----------------------"
+# SQL DATABASE INSIDE NETWORK
+docker run -d \
+    --network todo-app --network-alias mysql \  # new container is known as mysql inside the network
+    -v todo-mysql-data:/var/lib/mysql \  # sql data is stored in local folder
+    -e MYSQL_ROOT_PASSWORD=secret \   # setting environment variable for root_password
+    -e MYSQL_DATABASE=todos \  # set environment variable for database_name
+    mysql:5.7  # this specific mysql container allows certain environment variables
+docker exec -it e384a21b6d7d mysql -p  # opens mysql inside the container
