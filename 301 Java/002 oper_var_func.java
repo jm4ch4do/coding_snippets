@@ -53,93 +53,31 @@ double x = random.nextDouble();
 boolean z = random.nextBoolean()
     
     
-"------------------------IF-------------------------"
-public class Main {
+"------------------------METHODS-------------------------"
+// always need the Main method which serves as EntryPoint
+public class Main{
     
-    public static void main(String[] args){
-        
-    int age = 18;
-        
-    if(age>=18){
-        System.out.println("You are and adult");        
+    public class void main(String[] args){
+        hello("Bro" ,18);
     }
-    else if(age>=75){
-        System.out.println("Ok Boomer"); 
-    }
-    else{
-        System.out.println("You are not an adult"); 
-    }
-        
+    
+    static void hello(String name, int age){
+        System.out.println("Hello " +name + "You are "+age);
+        return age++
     }
 }
 
 
-"------------------------SWITCH CASE-------------------------"
-public class Main {
-    
-    public static void main(String[] args){
-        
-    String day = "Friday";
-        
-    switch(day){
-        case "Sunday": System.out.println("It is Sunday!");
-        break;
-        case "Monday": System.out.println("It is Monday!");
-        break;
-        case "Friday": System.out.println("It is Monday!");
-        break;
-        default: System.out.println("That is not a day!")
-        
-    }
-        
-    }
+"-----METHOD OVERLOADING-----"
+// having two methods with the same name but different parameter definition
+static int add(int a, int b){
+    return a + b;
 }
 
-
-"------------------------WHILE-------------------------"
-// Keep asking for name until user types something
-import java.util.Scanner;
-
-public class Main {
-    
-    public static void main(String[] args){
-        
-        Scanner scanner = new Scanner(System.in);
-        String name = "";
-        
-        while(name.isBlank()){
-            System.out.print("Enter your name: ");
-            name = scanner.nextLine();
-        }
-        
-        System.out.println("Hello"+name);
-    }
-    
+static int add(int a, int b, int c){
+    return a + b + c;
 }
 
-// do loop (always performs code at least once)
-        do{
-            System.out.print("Enter your name: ");
-            name = scanner.nextLine();
-        } while(name.isBlank());
-    
-
-"------------------------FOR-------------------------"
-for(int i=10; i>=0; i--){    // i-=2 to decrement 2
-    System.out.println(i);
-}
-
-System.out.println("Happy new year!");
-
-"----------------------FOR EACH-----------------------"
-// simpler but less flexible
-String[] animals = {"cat", "dog", "rat", "bird"}
-
-for(String i : animals){
-    System.out.println(i);
-}
-    
-    
     
     
     

@@ -30,6 +30,14 @@ public class Main {
 }
 
 
+"------------------------PRINTS-------------------------"
+System.out.print("Hello");  // print in the same line
+System.out.println("Hello");  // print new line
+System.out.printf("format string %d", 123);  // 123 goes to %d
+
+// %b boolean   %c char     %s String   %d int      %f double  
+
+
 "------------------------GET USER INPUT-------------------------"
 import java.util.Scanner;
 
