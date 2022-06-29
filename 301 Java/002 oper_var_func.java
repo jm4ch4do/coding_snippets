@@ -20,12 +20,23 @@ long x = 123456678990045434L;  // assigning long number always with L at the end
 float y = 3.14f;  // f at the end
 double y = 3.14;  // this type is more common    
 boolean z = false;
+
+// Wrapper data types extend the primitive datatypes to be reference
+// and have new useful methods
+
+// primitive    wrapper
+// boolean      Boolean
+// char         Character
+// int          Integer
+// double       Double
     
 "------------------------VARIABLES-------------------------"
 // dataType variableName
 int x;        // declaration
 x = 123;      // assignment
 int x = 123;  // initialization
+
+
 
 
 "------------------------OPERATORS-------------------------"
@@ -40,7 +51,7 @@ import java.util.Random;
 int x = random.nextInt();
 double x = random.nextDouble();
 boolean z = random.nextBoolean()
-
+    
     
 "------------------------IF-------------------------"
 public class Main {
