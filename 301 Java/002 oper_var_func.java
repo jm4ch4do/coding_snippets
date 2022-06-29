@@ -52,6 +52,9 @@ int x = random.nextInt();
 double x = random.nextDouble();
 boolean z = random.nextBoolean()
     
+// Final keyword means it can never be changed
+final double pi = 3.14159
+    
     
 "------------------------METHODS-------------------------"
 // always need the Main method which serves as EntryPoint
@@ -75,7 +78,7 @@ static int add(int a, int b){
 }
 
 static int add(int a, int b, int c){
-    return a + b + c;
+    return a + b + c ;
 }
 
     
