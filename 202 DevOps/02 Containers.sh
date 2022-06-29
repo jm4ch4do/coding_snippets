@@ -65,8 +65,3 @@ docker run -d \
     -e MYSQL_DATABASE=todos \  # set environment variable for database_name
     mysql:5.7  # this specific mysql container allows certain environment variables
 docker exec -it e384a21b6d7d mysql -p  # opens mysql inside the container
-
-
-"------------------------DATA STORAGE-------------------------"
-# docker data gets stored here
-/var/lib/docker

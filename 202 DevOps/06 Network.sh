@@ -69,6 +69,6 @@ docker inspect nginx
 docker run --name netshoot --rm -it --network my_network nicolaka/netshoot /bin/bash
 
 
-
+"------------------EXAMPLE WITH 5 CONTAINERS-----------------"
 
 
