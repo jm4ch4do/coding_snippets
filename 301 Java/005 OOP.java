@@ -1,3 +1,16 @@
+"------------------------PACKAGES-------------------------"
+import package.name.Class;   // Import a single class
+import package.name.*;   // Import the whole package
+
+// Put this on top of a class to make it part of a package
+// You can also create a package using IntelliJ, then right clic to add class
+package PackName;
+
+public class className {
+    
+}
+    
+    
 "------------------------OBJECT EXAMPLE-------------------------"
 // file Main.java
 public class Main{
