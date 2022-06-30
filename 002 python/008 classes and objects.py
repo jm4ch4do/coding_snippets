@@ -43,7 +43,8 @@ print(myc.area()) # print after changing through set
 ''' -------------------------------- INHERITANCE --------------------------------  '''
 class Animal():
 
-	def __init__(self):
+	def __init__(self, name):
+        self.name = name
 		print("ANIMAL CREATED")
 
 	def whoAmI(self):
@@ -55,7 +56,8 @@ class Animal():
 
 class Dog(Animal):
 
-	def __init__(self):
+	def __init__(self, name):
+        super().__init__(name)  # parent constructor
 		print("DOG CREATED")
 
 	def bark(self):
