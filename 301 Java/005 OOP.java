@@ -111,7 +111,20 @@ class Main {
   }
 }
 
+"------------------------ACCESS MODIFIERS-------------------------"
+MODIFIER        CLASS       PACKAGE     SUBCLASS        WORLD
+Public          Y           Y           Y               Y
+Protected       Y           Y           Y               N
+No Modifier     Y           Y           N               N
+Private         Y           N           N               N
 
+public Class myClass{
+
+    String defaultMessage = "Default Message"; // this value is not accessible outside the package
+    public String publicMessage = "Public Message"; // this one is accessible from anywhere
+    protected String protectedMessage = "Protected Message";  // accessible only the child classes
+    private String privateMessage = "Private Message";  // accessible only to current class
+}
 
 
 
