@@ -75,8 +75,10 @@ public class Worker extends Human{
         this.yearOfExperience = yearOfExperience;
     }
     
+    @Override  // this is recommended although it does nothing
     public String toString(){
         String myString = this.name;
         return "constructor: "+myString;
     }
 }
+
