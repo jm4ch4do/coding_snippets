@@ -127,6 +127,35 @@ public Class myClass{
 }
 
 
+"------------------------ENCAPSULATION-------------------------"
+class Encapsulate {
+    // private variables declared these can only be accessed by public methods of class
+    private String Name;
+    private int age;
+ 
+    public int getAge() { return geekAge; }
+ 
+    public String getName() { return geekName; }
+ 
+    public void setAge(int newAge) { geekAge = newAge; }
+ 
+    public void setName(String newName){ geekName = newName; }
+
+
+public class Main {
+    public static void main(String[] args)
+    {
+        Encapsulate obj = new Encapsulate();
+        
+        obj.setName("Harsh");
+        obj.setAge(19);
+        
+        // Displaying values of the variables
+        System.out.println("Geek's name: " + obj.getName());
+        System.out.println("Geek's age: " + obj.getAge());
+        
+    }
+}
 
 
 
