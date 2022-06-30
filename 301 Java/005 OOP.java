@@ -157,6 +157,18 @@ public class Main {
     }
 }
 
+"------------------------COPY OBJECTS-------------------------"
+// Objects are copied by reference so we need to have a copy method inside each class
+public void copy(Car someCar){
+    this.setModel(someCar.getModel);
+    this.setYear(someCar.getYear);
+}
+
+// you could also have a separate constructor for copying
+Car(Car someCar){
+    this.copy(someCar);
+}
+Car car2 = new car(car1);
 
 
 
