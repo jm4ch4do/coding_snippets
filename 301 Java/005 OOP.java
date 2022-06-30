@@ -57,7 +57,7 @@ public class Human {
     // ToStringMethod same as __str__ python method
     public String toString(){
         String myString = this.name;
-        return "name: "+myString;
+        return "human: "+myString;
     }
 
     void eat(){
@@ -73,6 +73,10 @@ public class Worker extends Human{
     Worker(String name, int age, int weight, int yearOfExperience){
         super(name, age, weight);  // calling parent constructor
         this.yearOfExperience = yearOfExperience;
-
+    }
+    
+    public String toString(){
+        String myString = this.name;
+        return "constructor: "+myString;
     }
 }
