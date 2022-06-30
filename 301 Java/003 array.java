@@ -15,6 +15,9 @@ for(int i=0; i<cars.length; i++){
     System.out.println(cars[i]);
 }
 
+// you can create an array of any object you create, for ex.
+Food[] refrigerator = new Food[3]
+
 
 "------------------------2D ARRAY-------------------------"
 String[][] cars = new String[2][2];
