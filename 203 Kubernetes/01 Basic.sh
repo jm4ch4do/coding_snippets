@@ -2,6 +2,7 @@
 # Kubernetes is shorted to K8S because you have 8 letters between k and s
 # Automatic Deployment, load balancing, auto-scaling, monitoring, replacement
 # K8s supports Docker, CRI-O, containerd
+kubectl version --client 
 
 
 "--------------------------------POD---------------------------------"
@@ -9,6 +10,7 @@
 # a POD has containers, shared volumes and shared IP address
 # One container per POD is the most common use case
 # One POD is always tied to one server
+
 
 "--------------------------------CLUSTER---------------------------------"
 # A Kubernetes cluster is composed of different Nodes (either physical or virtual servers)
