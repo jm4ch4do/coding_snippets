@@ -15,6 +15,7 @@ k scale deployment nginx-deployment --replicas=5  # increase to 5
 k scale deployment nginx-deployment --replicas=3  # decrease to 3
 
 
+
 "-------------------------------SERVICES-----------------------------"
 # Inside a deployment you have replicas of pods with different IPs
 # a Service provides a unique IP for balancing traffic to all replicas within the deployment
@@ -40,4 +41,26 @@ k get services
 k describe service nginx-deployment
 k delete service nginx-deployment
 
-"-------------------------------SERVICES-----------------------------"
+
+
+"-----------------------------DEPLOY UPDATE---------------------------"
+# New deployments have by default StrategyType: RollingUpdate which 
+# means than when you update the image in DockerHub it will create
+# new images with the new updated version while the old ones keep 
+# working with the old ones until the server is able to replace them all
+
+# set new image for a given deploment
+k set image deployment k8s-web-hello k8s-web-hello=m4ch4do/k8s-web-hello:2.0.0
+
+# verify the status of the migration
+k rollout status deploy k8s-web-hello 
+
+# you can also roll back to the previous image
+k set image deployment k8s-web-hello k8s-web-hello=m4ch4do/k8s-web-hello
+
+
+"----------------------------IMPERATIVE/DECLARATIVE-----------------------"
+# Imperative approach is deploying images like we did before by first creating the image
+# and later pulling it from DockerHub
+# Declarative approach is more often used and consist on creating the deployment from .yml
+# files that specify all image configuration

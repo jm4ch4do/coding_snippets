@@ -26,3 +26,7 @@ kubectl describe pod nginx
 
 "---------------------------------ALIAS--------------------------------"
 alias k="kubectl"  # replacing the long command kubectl by k (temporary alias)
+
+
+"----------------------------GENERAL COMMANDS---------------------------"
+kubectl delete all --all  # deletes all pods, deployments and services
