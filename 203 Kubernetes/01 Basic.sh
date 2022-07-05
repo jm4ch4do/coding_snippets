@@ -26,3 +26,7 @@ kubectl version --client
 
 # Every Worker uses the kubelet service to communicate with the API Server in the Master Node
 # Every Worker also has a kube-proxy which is responsible for network communication
+
+
+"--------------------------------TEST APP---------------------------------"
+curl 10.10.10.10  # send http request to the selected IP
