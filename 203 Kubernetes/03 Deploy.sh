@@ -59,8 +59,5 @@ k rollout status deploy k8s-web-hello
 k set image deployment k8s-web-hello k8s-web-hello=m4ch4do/k8s-web-hello
 
 
-"----------------------------IMPERATIVE/DECLARATIVE-----------------------"
-# Imperative approach is deploying images like we did before by first creating the image
-# and later pulling it from DockerHub
-# Declarative approach is more often used and consist on creating the deployment from .yml
-# files that specify all image configuration
+
+
