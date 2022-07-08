@@ -1,0 +1,79 @@
+<!------------------------- LINKS ------------------------->
+<!-- <a is a tag and href is an attribute -->
+<a href="https://www.w3schools.com">Visit W3Schools</a>
+
+<!-- open in another window -->
+<a href="https://www.w3schools.com/" target="_blank">Visit W3Schools!</a>
+<!-- 
+    _self - Default. Same window.
+    _blank - New Window or Tab.
+    _parent - Opens in parent frame
+    _top - Opens in the full body of the window
+-->
+
+<!-- link with image -->
+<a href="default.asp">
+    <img src="smiley.gif" alt="HTML tutorial" style="width:42px;height:42px;">
+</a>
+
+<!-- send email -->
+<a href="mailto:someone@example.com">Send email</a>
+
+<!-- button as link (uses javascript too) -->
+<button onclick="document.location='default.asp'">HTML Tutorial</button>
+
+<!-- link with comment -->
+<a href="https://www.w3schools.com/html/" title="Go to W3Schools HTML section">Visit our HTML Tutorial</a>
+
+
+<!------------------------- LINK BOOKMARK ------------------------->
+<h2 id="C4">Chapter 4</h2>
+<a href="#C4">Jump to Chapter 4</a>
+
+
+<!-- You can also add a link to a bookmark on another page -->
+<a href="html_demo.html#C4">Jump to Chapter 4</a>
+
+
+<!------------------------- LINK STYLES ------------------------->
+<style>
+a:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+</style>
+
+
+
+<!------------------------- IMAGES ------------------------->
+<!-- simple -->
+<img src="img_girl.jpg">
+
+<!-- all attributes -->
+<img src="img_girl.jpg" width="500" height="600" alt="Girl with a jacket">
+<img src="html5.gif" alt="HTML5 Icon" style="width:128px;height:128px;">
+
+<!-- absolute url -->
+src="https://www.w3schools.com/images/img_girl.jpg"
+
+<!-- relative url -->
+src="/images/img_girl.jpg"
