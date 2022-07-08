@@ -1,0 +1,44 @@
+<!------------------------- IMAGES ------------------------->
+<!-- simple -->
+<img src="img_girl.jpg">
+
+<!-- all attributes -->
+<img src="img_girl.jpg" width="500" height="600" alt="Girl with a jacket">
+<img src="html5.gif" alt="HTML5 Icon" style="width:128px;height:128px;">
+
+<!-- absolute url -->
+src="https://www.w3schools.com/images/img_girl.jpg"
+
+<!-- relative url -->
+src="/images/img_girl.jpg"
+
+<!-- floating images -->
+<p><img src="smiley.gif" alt="Smiley face" style="float:right;width:42px;height:42px;">
+The image will float to the right of the text.</p>
+
+
+<!-------------------- BACKGROUND IMAGES -------------------->
+<p style="background-image: url('img_girl.jpg');">
+
+<!-- avoid repetition -->
+<style>
+body {
+  background-image: url('example_img_girl.jpg');
+  background-repeat: no-repeat;
+}
+</style>
+
+    
+<!--------------- CHANGE IMAGE BASED ON SIZE --------------->
+<picture>
+  <source media="(min-width: 650px)" srcset="img_food.jpg">
+  <source media="(min-width: 465px)" srcset="img_car.jpg">
+  <img src="img_girl.jpg" style="width:auto;">
+</picture>
+
+    
+<!------------------------ FAV ICON ------------------------>
+<head>
+  <title>My Page Title</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+</head>
