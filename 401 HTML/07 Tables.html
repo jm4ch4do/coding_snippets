@@ -1,0 +1,129 @@
+<!------------------------- TABLES ------------------------->
+<!-- tr: table row    th: table header    td: table data -->
+
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+</table>
+
+
+<!-------------------- ADDITIONAL TAGS --------------------->
+<caption>  Defines a table caption
+<colgroup>  Specifies a group of one or more columns in a table for formatting
+<col>  Specifies column properties for each column within a <colgroup> element
+<thead>	Groups the header content in a table
+<tbody>	Groups the body content in a table
+<tfoot>	Groups the footer content in a table
+
+    
+<!------------------------- STYLES -------------------------->
+<!-- double borders (standard) -->
+table, th, td {
+  border: 1px solid black;
+}
+    
+<!-- single borders -->
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+<!-- collored cells -->
+th, td {
+  background-color: #96D4D4;
+}
+
+<!-- rounded cells -->
+table, th, td {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+border-style: dotted, dashed, solid, double, none, hidden
+    
+<!-- spacing -->
+th, td {
+  padding: 15px;
+}
+
+th, td {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+table {
+  border-spacing: 30px;
+}
+
+<!-- alternative rows change color -->
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+    
+    
+<!------------------------- SIZES -------------------------->
+<table style="width:100%">
+  <tr>
+    <th style="width:70%">Name</th> <th>Age</th>
+  </tr>
+  <tr>
+    <td>Jill</td> <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td> <td>94</td>
+  </tr>
+</table>
+
+
+<!-------------------- VERTICAL HEADERS --------------------->
+<table style="width:100%">
+  <tr>
+    <th>Firstname</th> <td>Jill</td> <td>Eve</td>
+  </tr>
+  <tr>
+    <th>Lastname</th> <td>Smith</td> <td>Jackson</td>
+  </tr>
+  <tr>
+    <th>Age</th> <td>50</td> <td>94</td>
+  </tr>
+</table>
+
+    
+<!-------------------- PUT CELLS TOGETHER --------------------->
+<!-- columns together -->
+<table>
+  <tr>
+    <th colspan="2">Name</th>
+    <th>Age</th>
+  </tr>
+</table>
+    
+<!-- rows together -->
+<table>
+  <tr>
+    <th>Name</th>
+    <td>Jill</td>
+  </tr>
+  <tr>
+    <th rowspan="2">Phone</th>
+    <td>555-1234</td>
+  </tr>
+  <tr>
+    <td>555-8745</td>
+</tr>
+</table>
