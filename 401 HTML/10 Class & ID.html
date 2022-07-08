@@ -1,0 +1,58 @@
+<!------------------------- CLASSES ------------------------->
+<!-- multiple objects may have the same class-->
+
+<!-- two objects with the same class-->
+<h2 class="city">London</h2>
+<p class="city">Paris is the capital of France</p>
+
+<!-- object with two classes-->
+<h2 class="city main">London</h2>
+
+
+<!-- class selector -->
+<style>
+.city {
+  background-color: tomato;
+  color: white;
+  padding: 10px;
+}
+</style>
+
+
+<!-- hide elements with a give class -->
+<script>
+function myFunction() {
+  var x = document.getElementsByClassName("city");
+  for (var i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+}
+</script>
+
+
+<!-------------------------- IDS -------------------------->
+<!-- IDs are unique identifiers -->
+<h1 id="myHeader">My Header</h1>
+
+
+<!-- id selector -->
+<style>
+#myHeader {
+  background-color: lightblue;
+  color: black;
+  padding: 40px;
+  text-align: center;
+}
+</style>  
+
+<!-- id for bookmark -->
+<a href="#C4">Jump to Chapter 4</a>
+<a href="html_demo.html#C4">Jump to Chapter 4</a>
+
+
+<!-- change text for a given ID -->
+<script>
+function displayResult() {
+  document.getElementById("myHeader").innerHTML = "Have a nice day!";
+}
+</script>
