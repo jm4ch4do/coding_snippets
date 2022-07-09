@@ -1,0 +1,119 @@
+<!-------------------------- BASIC TEXT FORM -------------------------->
+<form>
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname">
+</form>
+
+
+<!-------------------------- RADIO BUTTONS ---------------------------->
+<form>
+  <input type="radio" id="html" name="fav_language" value="HTML">
+  <label for="html">HTML</label><br>
+  <input type="radio" id="css" name="fav_language" value="CSS">
+  <label for="css">CSS</label><br>
+  <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+  <label for="javascript">JavaScript</label>
+</form>
+
+
+<!---------------------------- CHECKBOXES ----------------------------->
+<form>
+  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+  <label for="vehicle1"> I have a bike</label><br>
+  <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+  <label for="vehicle2"> I have a car</label><br>
+  <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+  <label for="vehicle3"> I have a boat</label>
+</form>
+
+
+<!------------------------------ SUBMIT ------------------------------->
+<!-- 
+    The <input type="submit"> defines a button for submitting the form data 
+    to a form-handler. The form-handler is typically a file on the server with
+    a script for processing input data. 
+
+    The action attribute defines the action to be performed when the form is submitted.
+    Each input field must have a name attribute to be submitted.
+-->
+
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+
+<!------------------------------ TARGET ------------------------------->
+<!-- 
+    The target attribute specifies where to display the response that is 
+    received after submitting the form.
+-->
+<form action="/action_page.php" target="_blank">
+
+_blank	   <!-- The response is displayed in a new window or tab  -->
+_self	   <!-- The response is displayed in the current window  -->
+_parent	   <!-- The response is displayed in the parent frame  -->
+_top	   <!-- The response is displayed in the full body of the window  -->
+framename  <!-- The response is displayed in a named iframe  -->
+
+    
+<!------------------------------ METHOD ------------------------------->
+<!-- 
+    The method attribute specifies the HTTP method to be used when submitting
+    the form data. The form-data can be sent as URL variables (with method="get")
+    or as HTTP post transaction (with method="post"). The default HTTP method when
+    submitting form data is GET.  
+-->
+<form action="/action_page.php" method="get">
+<form action="/action_page.php" method="post">
+    
+    
+<!------------------------------ EXTRA ------------------------------->
+<!-- 
+    AUTOCOMPLETE
+    The autocomplete attribute specifies whether a form should have autocomplete 
+    on or off. When autocomplete is on, the browser automatically complete values
+    Based on values that the user has entered before. 
+-->
+<form action="/action_page.php" autocomplete="on">
+
+
+<!-- 
+    NO VALIDATE
+    The novalidate attribute is a boolean attribute. When present, it specifies 
+    that the form-data (input) should not be validated when submitted.
+-->
+<form action="/action_page.php" novalidate>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
