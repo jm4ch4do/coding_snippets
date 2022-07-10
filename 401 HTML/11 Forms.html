@@ -7,47 +7,6 @@
 </form>
 
 
-<!-------------------------- RADIO BUTTONS ---------------------------->
-<form>
-  <input type="radio" id="html" name="fav_language" value="HTML">
-  <label for="html">HTML</label><br>
-  <input type="radio" id="css" name="fav_language" value="CSS">
-  <label for="css">CSS</label><br>
-  <input type="radio" id="javascript" name="fav_language" value="JavaScript">
-  <label for="javascript">JavaScript</label>
-</form>
-
-
-<!---------------------------- CHECKBOXES ----------------------------->
-<form>
-  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-  <label for="vehicle1"> I have a bike</label><br>
-  <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-  <label for="vehicle2"> I have a car</label><br>
-  <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-  <label for="vehicle3"> I have a boat</label>
-</form>
-
-
-<!------------------------------ SUBMIT ------------------------------->
-<!-- 
-    The <input type="submit"> defines a button for submitting the form data 
-    to a form-handler. The form-handler is typically a file on the server with
-    a script for processing input data. 
-
-    The action attribute defines the action to be performed when the form is submitted.
-    Each input field must have a name attribute to be submitted.
--->
-
-<form action="/action_page.php">
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname" value="John"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname" value="Doe"><br><br>
-  <input type="submit" value="Submit">
-</form>
-
-
 <!------------------------------ TARGET ------------------------------->
 <!-- 
     The target attribute specifies where to display the response that is 
@@ -90,30 +49,30 @@ framename  <!-- The response is displayed in a named iframe  -->
 -->
 <form action="/action_page.php" novalidate>
 
+    
+<!------------------------ OTHER ATTRIBUTES -------------------------->
+accept-charset	  <!-- Specifies the character encodings used for form submission -->
+enctype    <!-- Specifies how the form-data should be encoded when submitting 
+                     it to the server (only for method="post") -->
+novalidate    <!-- Specifies that the form should not be validated when submitted -->
+rel    <!-- Specifies the relationship between a linked resource and the current document -->
+    
 
+<!------------------------- ACTION / SUBMIT ---------------------------->
+<!-- 
+    The <input type="submit"> defines a button for submitting the form data 
+    to a form-handler. The form-handler is typically a file on the server with
+    a script for processing input data. 
 
+    The action attribute defines the action to be performed when the form is submitted.
+    Each input field must have a name attribute to be submitted.
+-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+  <input type="submit" value="Submit">
+</form>
+    
