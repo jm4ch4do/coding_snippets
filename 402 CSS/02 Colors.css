@@ -1,0 +1,16 @@
+/*----------------------- DEFINE BY NAME ----------------------*/
+/* background color */
+<h1 style="background-color:DodgerBlue;">Hello World</h1>
+
+/* text color */
+<p style="color:MediumSeaGreen;">Ut wisi enim...</p>
+
+/* border color */
+<h1 style="border:2px solid Violet;">Hello World</h1>
+
+
+/*--------------------- DEFINE EXACT COLOR --------------------*/
+<h1 style="background-color:rgb(255, 99, 71);">...</h1>
+<h1 style="background-color:rgba(255, 99, 71, 0.5);">...</h1>
+<h1 style="background-color:#ff6347;">...</h1>
+<h1 style="background-color:hsl(9, 100%, 64%);">...</h1>
