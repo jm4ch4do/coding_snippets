@@ -1,0 +1,69 @@
+<!------------------------- LINKS ------------------------->
+<!-- <a is a tag and href is an attribute -->
+<a href="https://www.w3schools.com">Visit W3Schools</a>
+
+<!-- open in another window -->
+<a href="https://www.w3schools.com/" target="_blank">Visit W3Schools!</a>
+<!-- 
+    _self - Default. Same window.
+    _blank - New Window or Tab.
+    _parent - Opens in parent frame
+    _top - Opens in the full body of the window
+-->
+
+<!-- link with image -->
+<a href="default.asp">
+    <img src="smiley.gif" alt="HTML tutorial" style="width:42px;height:42px;">
+</a>
+
+<!-- send email -->
+<a href="mailto:someone@example.com">Send email</a>
+
+<!-- button as link (uses javascript too) -->
+<button onclick="document.location='default.asp'">HTML Tutorial</button>
+
+<!-- link with comment -->
+<a href="https://www.w3schools.com/html/" title="Go to W3Schools HTML section">Visit our HTML Tutorial</a>
+
+
+<!------------------------- LINK BOOKMARK ------------------------->
+<h2 id="C4">Chapter 4</h2>
+<a href="#C4">Jump to Chapter 4</a>
+
+
+<!-- You can also add a link to a bookmark on another page -->
+<a href="html_demo.html#C4">Jump to Chapter 4</a>
+
+
+<!------------------------- LINK STYLES ------------------------->
+<style>
+a:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+</style>
+
+
+<!------------------------- IFRAMES ------------------------->
+<!-- Iframe is used to display a web page within a web page -->
+<iframe src="url" title="description"></iframe>
+<iframe src="demo_iframe.htm" height="200" width="300" title="Iframe Example"></iframe>
