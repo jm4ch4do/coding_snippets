@@ -13,12 +13,11 @@ class Book(models.Model):
     title = models.CharField(blank=True, null=True)  # it will store Null when is blank
     title = models.CharField(blank=True, default='my_value')  # default value for blank
     title = models.CharField(unique=True)  # you can't have two books with the same title
-    STATUSES = (
-        (0, 'Unknown'),
-        (1, 'processed'),
-        (2, 'paid')
+    CHOICES_CUSTOMER_STATUS = (
+        (0, 'Active'),
+        (1, 'Inactive')
     )
-    status = models.CharField(choices=STATUSES)  # allow only these set of values
+    status = models.SmallIntegerField(choices=CHOICES_CUSTOMER_STATUS)  # allow only these set of values
     title = models.CharField(blank=False, unique=True, max_length=200)
     description = models.TextField(max_length=256, blank=True)
     price = models.DecimalField(default=0, max_digits=5, decimal_places=2)

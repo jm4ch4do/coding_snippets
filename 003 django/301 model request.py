@@ -2,6 +2,11 @@
 python manage.py shell  # open django shell for working with models
 exit()  # closes the shell
 
+
+' ----------------------- GET ALL FIELDS IN MODEL --------------------- '
+User._meta.fields
+
+
 ' -------------------------- DJANGO SHELL PLUS ----------------------- '
 pip install jupyter ipython django-extensions   # install
 INSTALLED_APPS = [                              # register
