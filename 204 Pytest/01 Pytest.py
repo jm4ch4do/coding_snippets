@@ -18,37 +18,3 @@ nano pytest.ini
 
     # naming conventions for test files
     python_files = test.py test_*.py *_test.py
-
-    
-''' ------------------------------ FIRST TEST --------------------------- '''
-# create your first simple test
-nano test_ex1.py
-import pytest
-def test_example():
-    assert 1 == 1
-    
-command_lines >> pytest
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
