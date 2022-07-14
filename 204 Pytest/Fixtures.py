@@ -2,11 +2,11 @@
 - Arrange: # prepare for test. Create data, import modules, connect to API.
 - Act: # perform an action. Call function, call restAPI. Usually triggers a response.
 - Assert: # Evaluates the outcomes against the expected outcome. Return True if test has passed.
-    
+
+
     
 ''' ------------------------------ FIXTURES --------------------------- '''
 # Fixtures are actions that can be run before an action
-
 @pytest.fixture
 def fixture_1():
     print('run-fixture-1')
@@ -15,7 +15,20 @@ def fixture_1():
 def text_example1(fixture1):
     num = fixture_1
     assert num == 1
+
     
+''' ------------------------------ FILE FOR FIXTURES --------------------------- '''
+# you can put the fixtures in the same file as the test or
+# you can put fixtures in the file conftest.py since pytest will look for that name
+nano conftest.py
+import pytest 
+from django.contrib.auth.models import User
+
+@pytest.fixture()
+def user_1(db):
+    user = User.objects.create_user("test-user")
+    print('create-user')
+    return user
     
 ''' ----------------------- WHEN TO EXECUTE FIXTURES ------------------- '''
 # By default, fixtures are run one per function but it may be enough to 
@@ -63,6 +76,15 @@ class TestUsers:
     def test_my_user(self):
         me = User.objects.get(username='me')
         assert me.is_superuser
+        
+# EXAMPLE: database access within fixture
+@pytest.fixture
+def user_1(db):
+    return User.objects.create_user("test-user")
+
+@pytest.mark.django_db
+def test_set_check_password(user_1):
+    assert user_1.username == "test-user"
         
         
 ''' -------------------------- TEST DATABASES ---------------------- '''
