@@ -2,6 +2,8 @@
 # Pytest is a framework for unit testing which means it meant to test the small units
 # that make the whole system such as create Customer, delete Contacts and such.
 
+# Pytest is widely used in TDD(Test Driven Development)
+
 # Other types of testing such as performance testing are conceived to test the system as a whole
 
 # install for any python project

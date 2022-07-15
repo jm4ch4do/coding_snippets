@@ -54,6 +54,3 @@ def test_list_endpoint_only_list_notes_from_authenticated_user(client):
     assert 2 == content.count('<h3>')  # you have one <h3> for each note 
     
     
-@pytest.mark.django_db
-def test_create_endpoint_receives_form_data(client, logged_user):
-    form_data = {'title': "An impressive title", 'text': 'An interesting text'}
