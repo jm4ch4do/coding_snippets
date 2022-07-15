@@ -1,5 +1,13 @@
 ''' ------------------------------- BASIC -----------------------------  '''
-# install
+# Pytest is a framework for unit testing which means it meant to test the small units
+# that make the whole system such as create Customer, delete Contacts and such.
+
+# Other types of testing such as performance testing are conceived to test the system as a whole
+
+# install for any python project
+pip install pytest
+
+# install for Django
 pip install pytest-django
 
 # docs
