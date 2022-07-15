@@ -2,8 +2,7 @@
 - Arrange: # prepare for test. Create data, import modules, connect to API.
 - Act: # perform an action. Call function, call restAPI. Usually triggers a response.
 - Assert: # Evaluates the outcomes against the expected outcome. Return True if test has passed.
-
-
+    
     
 ''' ------------------------------ FIXTURES --------------------------- '''
 # Fixtures are actions that can be run before an action
@@ -108,6 +107,20 @@ def test_user_create2():
     print(count)
     assert User.objects.count() == 1
 
+
+''' --------------- FIXTURE EXAMPLE FOR CREATING USERS ------------ '''
+# Fixtures will help you reuse code
+@pytest.fixture
+def logged_user(client):
+    user = User.objects.create_user('Clara', 'clara@example.com', 'password')
+    client.login(username=user.username, password='password')
+    return user
+    
+@pytest.mark.django_db  # give access to database
+def test_list_endpoint_only_list_notes_from_authenticated_user(client, logged_user):
+
+    note = Notes.objects.create(title='a title', text='', user=logged_user)
+    note2 = Notes.objects.create(title='Another title', text='', user=logged_user)
 
         
 ''' -------------------------- TRANSACTIONS ---------------------- '''

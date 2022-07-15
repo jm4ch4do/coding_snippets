@@ -92,4 +92,35 @@ def test_example(new_user):
     assert True if user.username else False
     
     
-''' ------------------- FACTORY FOR RELATED TABLE ---------------- '''
+''' ------------------- CREATING SEQUENTIAL USERS ---------------- '''
+import factory
+from django.contrib.auth.models import User
+
+class UserFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = User
+        
+    username = factory.Sequence(lambda n: f"user_{n:04}") # user_0000, user_0001, user_0002
+    email = factory.LazyAttribute(lambda user: f"{user.username}@example.com")
+    password = factory.LazyFunction(lambda: make_password('password'))
+    
+# test
+from factories import UserFactory
+user = UserFactory()
+user.username, user.email, user.password
+
+
+''' ------------------------ FUZZY FACTORY --------------------- '''
+class NoteFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Notes
+        
+    title = fuzzy.FuzzyText(length=20)
+    text = fuzzy.FuzzyText(lenght=200)
+    
+    # if you don't specify the user, a new user will be created
+    user = factory.SubFactory(UserFactory)
+    
+    
+# if you want to specify the user you just need to pass it as a variable
+note = NoteFactory(user=logged_user)
