@@ -5,7 +5,8 @@ import pytest
 def test_example():
     print("testing case 1")
     assert 1 == 1
-    
+
+# test that fails
 def test_example2():
     assert 1 == 2
 
