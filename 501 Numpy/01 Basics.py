@@ -13,16 +13,3 @@
 
 # Common way of importing numpy
 import numpy as np
-
-
-''' -------------------------- ARRAYS ----------------------- '''
-# arrays can only contain one datatype and cannot be extended once created
-# they can store larger amounts of data and perform operations quickly
-import numpy as np
-array = np.array([1, 2, 3])
-
-# multiply each value
-array * 5
-
-# instead of
-[i*5 for i in list]
