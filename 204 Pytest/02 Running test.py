@@ -24,3 +24,7 @@ def test_example2():
 
 # specify the exact function test we want to run
 >> pytest app_lease/tests::test_example2
+        
+        
+# run test corresponding to a keyword (a keyword is a portion of a file's name)
+pytest -k test_fitness_log
