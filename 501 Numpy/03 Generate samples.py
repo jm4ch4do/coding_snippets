@@ -21,6 +21,8 @@ np.zeros(5)  # five 0s with type float
 np.zeros((4,5))  # 4x5 matrix of 0s also type float
 np.zeros((4,5), dtype=int)  # now it uses integers
 
+np.ones(5)  # five 0s with type float
+
 
 ''' ------------------- GENERATE EMPTY ---------------- '''
 # empty function creates an arrays of not initialized elements
