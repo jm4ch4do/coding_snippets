@@ -12,3 +12,13 @@ np.linspace(10,20,4) # [10., 12.5, 17.5, 20.]
 
 
 ''' ------------------- GENERATE RANDOM ---------------- '''
+np.random.rand(10)  # random float
+np.random.randint(0,100,20)  # 20 random integers from 0 to 100
+
+
+''' ------------------- GENERATE ZEROS/ONES ---------------- '''
+np.zeros(5)  # five 0s with type float
+np.zeros((4,5))  # 4x5 matrix of 0s also type float
+np.zeros((4,5), dtype=int)  # now it uses integers
+
+np.
