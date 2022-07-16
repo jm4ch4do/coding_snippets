@@ -35,6 +35,8 @@ ndim(integers)  # 2
 shape(integers)  # (2, 2)
 size(integers)  # 4
 
+integers.dtype  # int32
+
 
 ''' ------------------- TWO DIMENSIONAL ARRAYS ---------------- '''
 # Vector - One Dimension, Matrix - two dimensions, Tensor - Three dimensions
