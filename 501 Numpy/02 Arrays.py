@@ -11,7 +11,8 @@ array * 5
 [i*5 for i in list]
 
 
-''' -------------------------- INDEXING ----------------------- '''
+''' ---------------------- INDEXING/SLICING ------------------- '''
+# indexing works exactly the same as in python lists
 integers = np.array([10,20,30,40,50])
 integers[0] = 20  # works same as in lists
 integers[1] = 21.5  # it will save 21 since it's a list of integers
@@ -21,6 +22,12 @@ integers.dtype  # shows array type
 smallIntegers = np.array(integers, dtype=np.int8)
 integers.nbytes  # shows memory consumption
 samllIntegers.nbytes  # shows memory consumption
+
+# ----- Slicing
+arr[2:6]  # elements from 2 to 6
+arr[:5] # from start to 5
+arr[-3:]  # 3 last elements
+arr[::2]  # every second element
 
 
 ''' ------------------- LIST TO ARRAY ---------------- '''

@@ -25,3 +25,51 @@ ints_sorted = np.sort(ints)  # 50 sorted integers
 # you can say the new array is a different view of the same original array
 # to make an independent duplicate of an array use the copy() function
 new_array = array.copy()
+id(new_array)
+
+
+''' ------------------- RESHAPE ---------------- '''
+# transform multidimensional into unidimensional or viceversa
+OneD = np.arange(1, 13)  # [1, 2, 3 ..., 12]
+ThreeD = np.reshape(OneD, (3, 4))  # arrange in three vectors of 4 values each
+                                   # [1,  2,  3,  4],
+                                   # [5,  6,  7,  8],
+                                   # [9, 10, 11, 12]
+ThreeD = np.reshape(OneD, (3, 2, 2))  # three dimensional array of 3x2x2
+
+
+# convert from 2 dimensions to 1 dimension (flattening)
+arr = np.array([ [1, 2], [3, 4], [5, 6]])
+np.reshape(arr, -1)  # [1, 2, 3, 4, 5, 6]
+
+# you can also use flatten or ravel
+arr = [[1,2], [3,4]]
+new_arr = arr.flatten()  # creates a new copy
+same_arr = arr.ravel()   # creates a new view
+
+
+''' ------------------- CONCAT ---------------- '''
+arr1, arr2 = np.arange(1, 6), np.arange(6, 11)
+arr3 = np.concatenate(arr1, arr2)  # [1,2,3,4,5,6,7,8,9,10]
+
+# when joining two dimensional arrays you must specify join rows or columns
+arr3 = np.concatenate(arr1, arr2, axis=1)  # join rows 
+
+# you can also use stack() but it only concatenates columns
+arr3 = np.stack(arr1, arr2)
+
+# you can also specify horizontal stacking or vertical stacking
+arr3 = np.hstack(arr1, arr2)
+arr3 = np.vstack(arr1, arr2)
+
+
+''' ------------------- SPLIT ---------------- '''
+arr2 = np.array_split(arr, 4)  # divides into 4 subarrays of equal dimensions
+
+# you also have vertical and horizontal split
+arr2 = np.vsplit(arr, 4)
+arr2 = np.hsplit(arr, 4)
+
+
+
+
