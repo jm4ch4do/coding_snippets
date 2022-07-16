@@ -28,6 +28,13 @@ my_list = [1,2,3,4,5]
 my_array = np.array(my_list)
 
 
+''' ------------------- ARRAY PROPERTIES ---------------- '''
+integers = np.array([[1, 2][3, 4]])
+dtype(integers)  # int32
+ndim(integers)  # 2
+shape(integers)  # (2, 2)
+size(integers)  # 4
+
 
 ''' ------------------- TWO DIMENSIONAL ARRAYS ---------------- '''
 # Vector - One Dimension, Matrix - two dimensions, Tensor - Three dimensions
@@ -40,7 +47,7 @@ matrix[1][-1] # accesing last element
 matrix.ndim  # shows array dimensions
 
 
-''' ------------------- TWO DIMENSIONAL ARRAYS ---------------- '''
+''' ------------------- THREE DIMENSIONAL ARRAYS ---------------- '''
 tensor = np.array([
     [
         [1, 2, 3],
