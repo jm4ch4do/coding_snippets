@@ -21,4 +21,18 @@ np.zeros(5)  # five 0s with type float
 np.zeros((4,5))  # 4x5 matrix of 0s also type float
 np.zeros((4,5), dtype=int)  # now it uses integers
 
-np.
+
+''' ------------------- GENERATE EMPTY ---------------- '''
+# empty function creates an arrays of not initialized elements
+empty_array = np.empty(10, dtype=int)
+
+
+''' ------------------- FILL/FULL ARRAYS ---------------- '''
+# fill assigns values to a created arrays
+empty_array.fill(12)  # puts number 12 in every cell
+
+# full creates a new array
+np.full(5,10)  # [10, 10, 10, 10, 10]
+np.full((2,3),8) # [8, 8, 8]
+                 # [8, 8, 8]
+                 # [8, 8, 8]
