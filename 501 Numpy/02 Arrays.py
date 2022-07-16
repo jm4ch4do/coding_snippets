@@ -1,5 +1,5 @@
 ''' -------------------------- ARRAYS ----------------------- '''
-# arrays can only contain one datatype and cannot be extended once created
+# arrays can only contain one datatype
 # they can store larger amounts of data and perform operations quickly
 import numpy as np
 array = np.array([1, 2, 3])
