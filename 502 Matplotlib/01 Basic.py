@@ -1,4 +1,12 @@
+''' ------------------- SOURCE ---------------- '''
+# https://www.linkedin.com/learning/numpy-essential-training-2-matplotlib-and-linear-algebra-capabilities/
+
+    
 ''' ------------------- IMPORT ---------------- '''
+# if not using Anaconda you need to install packages
+pip install numpy
+pip install matplotlib
+
 # to show graphics on the Jupyter Notebook
 %matplotlib notebook
 %matplotlib inline
@@ -24,8 +32,8 @@ plt.show
 
 ''' ------------- FULL EXAMPLE / DEFINE X AXIS ---------- '''
 # data
-avg_temp = [39.1, 40.1, 48.0, 50.4, 60.3, 73.7, 80.0, 76.9, 68.8, 57.9, 53.0, 39.2]  # DATA
-months = ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+avg_temp = [39.1, 40.1, 48.0, 50.4, 60.3, 73.7, 80.0, 76.9, 68.8, 57.9, 53.0, 39.2]
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 # figure and plot
 fig = plt.figure()  
@@ -35,6 +43,7 @@ plt.plot(months, avg_temp)
 plt.title("Average monthly temperatures")
 plt.xlabel("months")
 plt.ylabel("temperatures")
+plt.grid(True)
 
 # show and save
 plt.show  
