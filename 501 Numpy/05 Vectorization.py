@@ -18,7 +18,9 @@ np.subtract(a, b)
 np.multiply(a, b)
 np.divide(a, b)
 
-# remainder of division
-np.mod(a, b)
+
+np.mod(a, b)  # remainder of division
 np.power(a, b)  # exponenciation
-np.sqrt(a, b)
+np.sqrt(a, b)  # square root
+
+
