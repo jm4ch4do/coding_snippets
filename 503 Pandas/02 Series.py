@@ -31,3 +31,6 @@ OO['city']
 
 # dataframe with 4 series
 oo[['Edition', 'City', 'Athlete', 'Medal']]
+
+
+''' -------------- DISPLAY SPECIFIC LINE ------------- '''
