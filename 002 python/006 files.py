@@ -4,6 +4,7 @@ import os # module for handling the operative system
 
 print(dir(os)) # shows all attributes and methods inside module
 
+
 ''' ----------------------------------- EXPLORE ---------------------------------  '''
 currentWorkingDir = os.getcwd()
 newWorkingDir = os.chdir('Users/coreyschafer/Desktop')
@@ -28,6 +29,7 @@ print(dirpath)
 print(dirnames)
 print(filenames)
 
+
 ''' ------------------------------- CREATE REMOVE -------------------------------  '''
 os.mkdir('OS-Demo') # creates folder
 os.makedirs('OS-Demo/another-folder') # creates 'OS-Demo' and then 'another-folder' inside it
@@ -37,12 +39,14 @@ os.removedirs('OS-Demo/another-folder') # deleter both 'another-folder' amd 'OS-
 
 os.rename('test.txt', 'demo.txt') # renames 'test.txt' to 'demo.txt '
 
+
 ''' ------------------------------- ATTRIBUTES -------------------------------  '''
 os.stat('demo.txt') # data about file
 os.stat('demo.txt').st_size  # size in bytes
 os.stat('demo.txt').st_mtime # modification date in timestamp
 
 os.path.getsize('string') # returns size of file in bytes
+
 
 ''' ------------------------------ BUILDING PATH -----------------------------  '''
 # combining Path
@@ -63,6 +67,7 @@ os.path.isfile('string')
 os.path.isdir('string')
 os.path.isabs('spam.png') # returns False because is not an absolute path
 
+
 ''' ----------------------------- OPEN WRITE FILES ---------------------------  '''
 fileRead = open('c:\\users\\jose\\hello.txt') # opens file in read mode
 fileRead.read() # returns string with file content
@@ -70,6 +75,7 @@ fileRead.close() # kills the fileRead object, you need to use open again if want
 
 fileRead.readlines() # returns each line in a list index
 
+fileRead = open('c:\\users\\jose\\hello.txt', 'r') # open in read mode which is the default choice
 fileRead = open('c:\\users\\jose\\hello.txt', 'w') # open in write mode which erases everything an start writing from scratch
                                                    # (both create file if doesn't exist)
 fileRead = open('c:\\users\\jose\\hello.txt', 'a') # open in append mode for writing at the end of file
@@ -91,6 +97,7 @@ shutil.copy('c:\\spam.txt','c:\\delicious\\spam2.txt') # copy and rename
 shutil.copytree('c:\\fol1\\', 'c:\\fol1-backup\\') # copy entire content of folder
 
 shutil.move('c:\\spam.txt', 'c:\\delicious\\walnut') # move (if want to rename just move to same place with different name)
+
 
 ''' ------------------------------- DELETE FILES -----------------------------  '''
 os.unlink('spam.txt') # remove file
