@@ -17,3 +17,7 @@ oo.head()  # first 5 rows
 oo.head(20) # first 20 rows
 oo.tail()
 oo.tail(20)
+
+
+''' ------------------- SELECT SERIES ---------------- '''
+age_sex = titanic[["Age", "Sex"]]
