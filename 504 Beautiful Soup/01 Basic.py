@@ -18,3 +18,6 @@ pip install beautifulsoup4  # create a parse a navigable html doc
 ''' ------------------- TESTING ---------------- '''
 # This web is always available for scrapping
 https://quotes.toscrape.com/
+    
+# Extra docs about scrapping
+scrapingclub.com
