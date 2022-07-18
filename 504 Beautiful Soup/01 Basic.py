@@ -1,5 +1,5 @@
 ''' ------------------- SOURCE ---------------- '''
-# https://www.linkedin.com/learning/using-python-for-automation/the-value-of-web-scraping
+# https://www.linkedin.com/learning/using-python-for-automation/
 
 
 ''' ------------------- CONCEPT ---------------- '''
@@ -20,4 +20,4 @@ pip install beautifulsoup4  # create a parse a navigable html doc
 https://quotes.toscrape.com/
     
 # Extra docs about scrapping
-scrapingclub.com
+https://scrapingclub.com
