@@ -34,3 +34,4 @@ oo[['Edition', 'City', 'Athlete', 'Medal']]
 
 
 ''' -------------- DISPLAY SPECIFIC LINE ------------- '''
+oo.index
