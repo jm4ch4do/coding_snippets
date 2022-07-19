@@ -16,16 +16,3 @@ pip install requests  # get the get query
 
 ''' ------------------- IMPORTS ---------------- '''
 import requests
-
-
-''' ------------------- EXAMPLE ---------------- '''
-# goal_url = www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
-
-import requests
-
-base_url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?'
-parameters = {'s': 'margarita'}
-response = requests.get(base_url, params=parameters)
-url = response.url
-text = response.text
-status_code = response.status_code
