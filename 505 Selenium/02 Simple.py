@@ -1,4 +1,5 @@
 ''' ------------------- SIMPLE BOT WITH SELENIUM ---------------- '''
+# example of filling fields and pressing buttons
 
 # import
 from selenium import webdriver
