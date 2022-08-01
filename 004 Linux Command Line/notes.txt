@@ -10,7 +10,7 @@ ncal -A 1  Rem S ome commands require arguments if using an specific option.
            Rem This example is print one month after
 ncal -M -A1 -B1 july 1969  Rem long example with all included
 
-help command  Rem can be used for built-in commands such as "cd" that doesn't have man pages
+# help command  Rem can be used for built-in commands such as "cd" that doesn't have man pages
 man command   Rem manual of some command. q-quit f(or space)-forward b-back 
               Rem h-help /patter-searchForward ?pattern-searchBackWards
 man 1 passwd  Rem is the standard man page for command passwd (section1)
