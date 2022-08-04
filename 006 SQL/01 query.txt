@@ -9,6 +9,9 @@
     WHERE DATE(b.starttime) = DATE('2012-09-21')
     AND name LIKE 'Tennis%'
     ORDER BY b.starttime
+    
+/*.......................................OPERATORS.......................................*/
+    ON IN NOT AND OR
 
 /*........................................SELECT........................................*/
 -- SELECT may also be select, and the ; at the end is not mandatory
@@ -38,7 +41,6 @@ SELECT first_name, last_name FROM actor;
     -- order always comes last in the query except for LIMIT
     SELECT column_1 FROM table ORDER BY column_1 ASC/DESC
     SELECT store_id, first_name, last_name FROM customer ORDER BY store_id DESC, first_name ASC
-
 
 /*-----LIMIT-----*/
     -- Limit is always last in a query
