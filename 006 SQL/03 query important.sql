@@ -93,13 +93,77 @@ GROUP BY company
 HAVING SUM(sales) > 1000  -- filtering value beign AGG
 
 
+SELECT cd.department_name, count(*)
+FROM data_sci.employees e
+JOIN data_sci.company_departments cd
+ON e.deparment_id = cd.id
+GROUP BY cd.department_name
+HAVING count(*) > 50
+ORDER BY cd.department_name
 
 
+/*.............................SELECT IN MULTIPLE PLACES..............................*/
+/* ----- SELECT WITHIN SELECT ----- */
+/* get the worker's salary and the avg salary in his department */
+SELECT e1.last_name, e1.salary, e1.department_id,
+    ( SELECT ROUND(AVG(e2.salary), 2) 
+      FROM data_sci.employees e2 
+      WHERE e1.department_id = e2.department_id
+    )
+FROM data_sci.employees e1
+
+/* ----- SELECT WITHIN FROM ----- */
+SELECT ROUND(AVG(e1.salary), 2)
+FROM (
+    SELECT * 
+    FROM data_sci.employees
+    WHERE salary > 100000 
+) e1
+
+/* ----- SELECT WITHIN WHERE ----- */
+/* Department with the worker with the higher salary */
+SELECT department_id
+FROM data_sci.employees e1
+WHERE ( SELECT MAX(salary) FROM data_sci.employees e2 ) = e1.salary
 
 
+/*.....................................ROLL UP......................................*/
+/* roll up makes a counting summary*/
+
+SELECT cr.country_name, cr.region_name, count(e.*)
+FROM data_sci.employees e
+JOIN data_sci.company_regions cr
+ON e.region_id = cr.id
+GROUP BY ROLLUP(cr.country_name, cr.region_name)
+ORDER BY cr.country_name, cr.region_name
+
+canada  british columbia   134
+canada  nova scotia        164
+canada  quebec             123
+canada  [null]             421
+usa     northeast          149
+usa     northwest          137
+usa     southeast          164
+usa     southwest          175
+usa     [null]             625
+[null]  [null]            1046
 
 
-
+/*.....................................CUBE......................................*/
+/* Cube makes counting summaries making varios combinations of country and department*/
+FROM data_sci.employees e
+JOIN data_sci.company_regions cr
+ON e.region_id = cr.id
+JOIN data_sci.company_departments cd
+ON e.department_id = cd.id
+GROUP BY    
+    CUBE(cr.country_name,
+         cr.region_name,
+         cd.department_name)
+ORDER BY
+    cr.country_name,
+    cr.region_name,
+    cd.department_name
 
 
 
@@ -112,3 +176,4 @@ REVIEW CODES
 lock
 begin
 commit
+explain
