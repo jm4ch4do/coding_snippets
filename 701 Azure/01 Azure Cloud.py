@@ -9,9 +9,13 @@
 ''' -------------------- AZURE CLOUD COMPUTING -------------------- '''
 # With cloud computing you purchase the resources you need in a cloud data center
 # instead of your own personal computer, so you can easily adjust the services you need
-# and delegate maintenance tasks to the cloud provider.
+# and delegate maintenance tasks to the cloud provider such as Back Ups, updates and high availability.
 
-Basic Services: Compute Power, Storage
+Basic Services:
+    Computer Power - CPU, RAM
+    Storage - Hard Drive Space
+    
+Extended Services: Virtual Machines, Storage, Databases, Networking, Internet of Things and Machine Learning
 
 
 
