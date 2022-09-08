@@ -16,6 +16,14 @@ type(DataFrame)
 # if you selected more than one series then the object type is dataframe
 
 
+''' ------------------- WORKING DIRECTORY ---------------- '''
+# get working directory
+import os
+cwd = os.getcwd()
+
+
+
+
 ''' ------------------- READ FILE ---------------- '''
 file_path = './data/olympics.csv'
 oo = pd.read_csv(file_path, skiprows=4)  # read file
