@@ -1,2 +1,2 @@
-# coding_snippets
-Snippets for different languages
+# Coding Snippets
+Snippets for different languages, frameworks and technologies.
