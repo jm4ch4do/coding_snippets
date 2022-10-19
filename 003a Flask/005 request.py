@@ -1,7 +1,7 @@
 ' ---------------------------- REQUEST ----------------------------- '
 method = request.method  # method is GET, POST, PUT
 data = request.form    # access data in POST or PUT methods
-searchword = request.args.get('key', '')
+searchword = request.args.get('key', '')  # get variable in URL
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
