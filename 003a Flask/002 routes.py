@@ -1,5 +1,6 @@
-' ---------------------------- BASIC ROUTES ----------------------------- '
+' ------------------------- BASIC ROUTES -------------------------- '
 @app.route('/')
+@app.route('/home')  # page is linked to two routes
 def index():
     return 'Index Page'
 
@@ -8,7 +9,7 @@ def hello():
     return 'Hello, World'
 
 
-' ---------------------------- BASIC ROUTES ----------------------------- '
+' ------------------------- BASIC ROUTES -------------------------- '
 from markupsafe import escape
 
 # show the user profile for that user
@@ -38,14 +39,14 @@ def show_subpath(subpath):
 # uuid: accepts UUID strings
 
 
-' ---------------------------- REVERSE URL ----------------------------- '
+' -------------------------- REVERSE URL --------------------------- '
 url_for('index')
 url_for('hello')
 url_for('login', next='/')
 url_for('profile', username='John Doe')
 
 
-' ---------------------------- REQUEST METHOD ----------------------------- '
+' ------------------------ REQUEST METHOD ------------------------- '
 from flask import request
 
 # Alternative 1
