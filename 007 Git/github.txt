@@ -69,7 +69,7 @@ git push origin <local-branch>:<remote-branch>
 git push -u origin main  # connects local to remote main
 git push  # now you can make git push with nothing else to add
 
-
+git push --force-with-lease  # force push after amend
 # ------------------------- TRACKING REMOTE ------------------------- #
 # compare with remote state
 git branch -r  # view remote branches
