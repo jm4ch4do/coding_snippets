@@ -70,6 +70,7 @@ git push -u origin main  # connects local to remote main
 git push  # now you can make git push with nothing else to add
 
 git push --force-with-lease  # force push after amend
+git push --set-upstream origin <branch_name>
 # ------------------------- TRACKING REMOTE ------------------------- #
 # compare with remote state
 git branch -r  # view remote branches
@@ -104,6 +105,8 @@ git pull origin main
 
 # remote defaults to origin and branch to the configured tracking connection
 git pull  # so this pulls from the same branch in remote
+
+git pull -p # --prune remove references that no longer exists in remote before pulling
 
 
 # -------------------------- GIT HUB CONFIG--------------------------- #
