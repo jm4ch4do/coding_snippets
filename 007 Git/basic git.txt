@@ -196,6 +196,8 @@ git reset --hard commit_hash
 # or to go 2 commits back
 git reset HEAD~2
 
+git reset HEAD~1  # deletes last commit moving changes to unstage area
+
 # git reset undos the history of commits so it's not recommended
 # to be executed on remote repos because history should remain consistent
 # when working with a team
