@@ -16,6 +16,9 @@
 # These two drivers are installed like common windows programs
 pip install selenium
 
+# download specific driver for your browser from here
+https://www.selenium.dev/downloads/
+    
 
 ''' ------------------- IMPORTS ---------------- '''
 from selenium import webdriver  # is a web driver
