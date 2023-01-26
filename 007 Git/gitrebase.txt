@@ -1,0 +1,6 @@
+# ------------------------------ INTERACTIVE REBASE ----------------------------- #
+git rebase -i HEAD~5  # go back 5 commit messages
+                      # this takes you to the interactive rebase view
+
+Ctrl + C to exit edit mode
+:x to execute
