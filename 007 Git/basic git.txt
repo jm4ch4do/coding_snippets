@@ -9,7 +9,8 @@ git --version
 
 # set username and email for all future work
 git config --global user.name "Jose Machado" 
-git config --global user.email m4ch4do@protonmail.com 
+git config --global user.email m4ch4do@protonmail.com
+git config --global core.editor "nano"
 
 # get username
 git config user.name
@@ -46,7 +47,8 @@ git lob --oneline  # better display
 git commit -m 'some comment'
 git commit -am 'some comment'  # adds all unstaged changes
 git add forgotten_file
-git commit --amend
+git commit --amend -m 'some comment'
+git commit --amend --no-edit  # keeps the previous message
 
 
 # ------------------------------ IGNORE  ------------------------------ #
