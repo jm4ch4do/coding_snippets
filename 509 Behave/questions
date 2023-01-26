@@ -1,0 +1,7 @@
+how can I debug feature?
+How can I explore the mongo DB?
+Should I create a new file for my feature?
+Where do I put my steps? 
+Do I need to access API for Impulse and Unity or is all contained in here? -> I think itil_utils.py
+
+Find list of 10 assets that are NON_PRD
