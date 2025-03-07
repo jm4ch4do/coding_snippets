@@ -43,3 +43,4 @@ Export class PlayersComponent implements OnInit {  // Examples of component clas
 
 NEW COMMAND
 ng generate component listings-page  # creates new component
+ng generate service service-name # generates new service
