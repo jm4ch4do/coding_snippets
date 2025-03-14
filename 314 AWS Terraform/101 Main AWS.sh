@@ -15,4 +15,4 @@ choco install awscli
 aws --version
 # create access key in UI
 aws configure  # connects cmd to aws
- aws sts get-caller-identity  # retrieve user info to verify connection
+aws sts get-caller-identity  # retrieve user info to verify connection

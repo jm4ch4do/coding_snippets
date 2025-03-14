@@ -1,4 +1,6 @@
 # ---------------------------- VARIABLES -----------------------------------
+# variables are declared in variables.tf and assigned in terraform.tfvars
+
 variable "virginia_cidr"{
   default = "10.10.0.0/16"
 }
@@ -59,11 +61,18 @@ resource "aws_vpc" "vpc" { # set
 var.virginia.owner  # object
 var.ohio[0]  # tuple
 
-# ---------------------------- OUTPUT -----------------------------------
+# ------------------------------------- OUTPUT ---------------------------------------
 # used to export information from Terraform
 # every resource has a section of "Attributes Reference" that can be found in docs
 # where we can find values that can be exposed throught outputs
 output "linux_public_ip"{
   value = aws_instance.linux.public_ip
   description = "Showing ip address assigned to instance"
+}
+
+
+# -------------------------------------- DATA ---------------------------------------
+# data finds resources already existing to be able to use in our terraform
+data "aws_key_pair" "key"{
+    key_name = "my_key"
 }
