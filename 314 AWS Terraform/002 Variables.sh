@@ -51,6 +51,7 @@ variable "ohio" {  # tuple
 # Examples access
 var.cidrs_list[0]  # list
 var.map_cidrs["ohio"]  # map
+lookup(var.cidr, terraform_workspace, var.cidr["default"])  # map
 resource "aws_vpc" "vpc" { # set
   for_each = var.set_cidrs 
   cird_block = each.value
