@@ -66,6 +66,7 @@ terraform destroy  --target=aws_instance.public_instance  # deletes only target
 terraform taint  # marks for create/destroy in next plan 
 terraform untaint  # unmarks for create/destroy in next plan 
 
+terraform console  # enters terraform console to use as playground for functions
 terraform show  # see details of created resources
 terraform fmt  # formats all files (formatting is not require to work)
 terraform validate  # validates syntax
