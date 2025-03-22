@@ -10,7 +10,7 @@ resource "aws_instance" "public_instance" {
   }
 }
 
-lifecycle {revent_destroy = true}  # if new plan requires destroy, it will return error and prevent execution
+lifecycle {prevent_destroy = true}  # if new plan requires destroy, it will return error and prevent execution
 lifecycle {ignore_changes = [ami]}  # prevents any changes in the ami argument
 lifecycle {replace_triggered_by = [aws_subnet.private_subnet.id]}  # forces create/destroy if subnet changes
 

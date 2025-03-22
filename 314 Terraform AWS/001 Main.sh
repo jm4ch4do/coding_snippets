@@ -68,7 +68,7 @@ terraform apply --auto-approve=true  # skips verification question
 terraform apply --target aws_subnet.public_subnet  # targets specific resource
 terraform apply --replace aws_instance.public_instance  # destroys and creates resource
 terraform destroy  # deletes everything found in the state
-terraform destroy  --target=aws_instance.public_instance  # deletes only target
+terraform destroy --target=aws_instance.public_instance  # deletes only target
 terraform taint  # marks for create/destroy in next plan 
 terraform untaint  # unmarks for create/destroy in next plan 
 
@@ -81,12 +81,12 @@ terraform output name_of_output  # targets specific output
 terraform providers  # shows providers
 terraform refresh  # looks for changes in deployment to update tfstate
                    # is included in terraform plan
-
 terraform graph  # lists resources and dependencies 
 terraform graph | dot -Tsvg > graph.svg  # saves graph to visible format
+
 terraform state list  # summarized list of deployed resources (shows taint)
 terraform state show aws_instance.public_instance  # details of resource
-terraform state mv SOURCE DESTINATION  # move resources (avoids delete and destroy)
+terraform state mv SOURCE DESTINATION  # move (edit) resources (avoids delete and destroy)
 terraform state mv aws_subnet.public aws_subnet.public_default  # renames subnet
 terraform state rm aws_subnet.public  # deletes resource from terraform_state
 terraform state pull  # downloads state from remote

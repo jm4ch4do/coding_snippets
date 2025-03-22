@@ -25,7 +25,7 @@ module "my_bucket" {
   bucket_name = "uniquename_135792468"
 }
 output "s3_arn"{
-  value = module.my_bucket.arn
+  value = module.my_bucket.s3_bucket_arn
 }
 
 # YOU CAN ALSO USE MODULES AVAILABLE IN INTERNET

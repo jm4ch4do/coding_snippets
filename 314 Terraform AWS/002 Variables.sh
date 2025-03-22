@@ -5,10 +5,10 @@ variable "virginia_cidr"{
   default = "10.10.0.0/16"
 }
 export TF_VAR_virginia_cidr="10.10.0.0/16"  # export variable in command line
-env | grep TF  # muestra variables exportadas
-unset TF_VAR_virginia_cidr  # borrar
+env | grep TF  # shows exported variables
+unset TF_VAR_virginia_cidr  # delete variable
 
-# variables are be default loaded from files:
+# variables are by default loaded from these files:
 terraform.tfvars or *.auto.tfvars or previous_two_plus .json
 
 # you can also load certain variables using:
@@ -29,7 +29,7 @@ variable "map_cidrs"{  # map
     "ohio" = "10.20.0.0/16"
   }
 }
-variable "set_list"{  # list
+variable "cidrs_set"{  # set
   default = ["10.10.0.0/16", "10.20.0.0/16"]
   type = set(string)
 }

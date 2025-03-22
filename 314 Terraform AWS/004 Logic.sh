@@ -4,7 +4,7 @@
 # since it indexes with nums as [0], [1], [2] which is confusing)
 instances = ["apache", "mysql", "jumpserver"]
 resource "aws_instance" "public_instance" {
-  count         = 3
+  count = 3
   ...}
 
 # Creates a server per each name in variable
