@@ -77,3 +77,54 @@ output "linux_public_ip"{
 data "aws_key_pair" "key"{
     key_name = "my_key"
 }
+
+
+# -------------------------------------- LOCALS ---------------------------------------
+# file locals.tf generally but could go anywhere
+# locals are the same as variables but with a shorter scope. They are internal to modules.
+# Can no be passed from CLI or modified during runtime. Generally, variables are made to be
+# modified by user and locals to be constant or pre-calculated values.
+locals{
+  suffix = "cerberus${var.tags.project}=${var.tags.env}-${var.tags.region}"  # calculated value
+  iac = "terraform"  # fix value
+}
+${local.suffix}  # place like this in resources
+
+
+# -------------------------------------- DYNAMIC BLOCKS ---------------------------------------
+# In some cases, like when defining rules for security groups, you have to repeat blocks multiples times.
+# Dynamic blocks allow you to set the fix part and pass values to the variable part
+
+# variable with 5 ingress blocks
+variable "ingress_rules" {
+  description = "List of security group ingress rules"
+  type = list(object({
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+  }))
+
+  default = [
+    { from_port = 22, to_port = 22, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
+    { from_port = 80, to_port = 80, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
+    { from_port = 443, to_port = 443, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
+    { from_port = 8080, to_port = 8080, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
+    { from_port = 3306, to_port = 3306, protocol = "tcp", cidr_blocks = ["10.0.0.0/16"] }
+  ]
+}
+
+# resource is created without repeating the ingress block many times
+resource "aws_security_group" "example" {
+  name = "my-security-group"
+
+  dynamic "ingress" {
+    for_each = var.ingress_rules
+    content {
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
+    }
+  }
+}

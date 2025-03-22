@@ -23,6 +23,12 @@ https://registry.terraform.io/browse/providers  # block types for aws provider
 https://developer.hashicorp.com/terraform/docs/glossary  # terraform glosary
 https://app.diagrams.net/  # dibujar diagrama de red
 
+# Terraform code tools
+https://github.com/infracost/infracost  # cmd and vscode tool to calculate costs
+https://github.com/aquasecurity/tfsec  # scans terraform code for security problems
+https://github.com/terraform-linters/tflint  # improved version of terraform validate
+https://github.com/tfutils/tfenv  # improved terraform version management
+
 
 # -------------------------------------- STATE ---------------------------------------
 # The terraform.tfstate file is created by terraform to store the deployed config
@@ -83,6 +89,7 @@ terraform state show aws_instance.public_instance  # details of resource
 terraform state mv SOURCE DESTINATION  # move resources (avoids delete and destroy)
 terraform state mv aws_subnet.public aws_subnet.public_default  # renames subnet
 terraform state rm aws_subnet.public  # deletes resource from terraform_state
+terraform state pull  # downloads state from remote
 
 terraform workspace list  # shows workspaces (is like venv)
 terraform workspace new prod  # new workspace called "prod"
@@ -135,3 +142,13 @@ terraform import aws_instance.mywebserver i-009bdc745446954c4
 terraform state show aws_instance.mywebserver  # copy resource info from output of command
 # and paste into terraform resource
 # you'll have to eliminate many parameters that are read only but after that is fully imported
+
+
+# -----------------------------  TERRAFORM CLOUD -------------------------------------
+# Terraform cloud offers an alternative to store the state in S3 and control concurrent
+# access with DynamoDB. 
+# 1. It also adds remote execution (user no longer needs to install terraform)
+# 2. Management of queue and permissions
+# 3. Integration with Github
+# 4. Management of secrets and variables
+# 5. Web interface to visualize plans and states
