@@ -13,3 +13,41 @@
 701 Azure/~$ure Fundamentals.docx
 
 *.tmp
+
+
+
+# Terraform ---------------------------------
+# Local Terraform directories and files
+.terraform/
+.terraform.tfstate.lock.info
+.terraform.lock.hcl
+
+# Terraform state files
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfstate.*
+
+# Crash logs
+crash.log
+
+# Override files (used for local changes)
+terraform.tfvars
+*.tfvars.json
+
+# Sensitive files
+*.pem
+*.key
+*.crt
+*.env
+
+# Ignore plan output
+terraform.plan
+plan.out
+
+# Ignore IDE/editor config files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+*.bak
