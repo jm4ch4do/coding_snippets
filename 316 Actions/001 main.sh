@@ -13,6 +13,7 @@ Workflows            <- Triggers(events) are assigned to Workflows
     Step2b           <- Steps are shell scripts or actions 
                      Actions are pre-defined and configurable code (preferred)
 
+
 # ---------------------------------- BASIC WORKFLOW ----------------------------------
 name: First Workflow
 on: workflow_dispatch  # workflow can be triggered manually
@@ -25,40 +26,42 @@ jobs:
       - name: Get code using action
         uses: actions/checkout@v3
 
-# ------------------------------------ EVENTS ------------------------------------
+
+# ----------------------------------- EVENTS -----------------------------------
 on: workflow_dispatch # workflow can be triggered manually
 on: push  # runs when pushing a commit (most common usage)
-repository_related-> pull_request, create, fork, issues, issue_comment, watch
-other-> respository_dispatch  # REST api can request workflow
-     -> schedule  # workflow can be scheduled
-     -> workflow_call  # can be called by other workflows
 
-# conditions to only trigger when js code is pushed in release branches
+# repository related
+on: [pull_request, create, fork, issues, issue_comment, watch]  
+# others
+on: [respository_dispatch, schedule, workflow_call]
+     # respository_dispatch: REST api can request workflow
+     # schedule: workflow can be scheduled
+     # workflow_call: can be called by other workflows
+
+# --- FILTERS AND ACTIVITY TYPES
+# filters to only trigger for push event when js code is pushed in release branches
+# also, only trigger for pull_request when opening, closing or synchronizing
 on:
-  push:
-    branches:
+  push:                # event
+    branches:          # filter
       - 'release/**'
-    paths:
+    paths:             # filter
       - '**.js'
-      
-# ------------------------------------ ACTIONS ------------------------------------
-# you can use your own actions or use community actions from marketplace
-      - name: Install NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18  # parameters are specified in the action documentation
+    pull_request:      # event
+      types:           # activity type (these are actually the default values)
+        - opened
+        - reopened
+        - synchronized
 
 
-# -------------------------------------- JOBS --------------------------------------
+# ----------------------------------- JOBS -----------------------------------
 # jobs can be configure to run only if a previous job passed
 jobs:
   test:
     ...
   deploy:
     needs: test  # also takes a list: [test, job2]
-
-# multiple triggers
-on: [push, workflow_dispatch]
 
 
 # -------------------------------------- CONTEXT --------------------------------------
@@ -71,4 +74,4 @@ on: [push, workflow_dispatch]
       - name: Output repo url
         run: echo "${{ github.server_url }}/${{ github.repository }}"
 
-other_contexts: env, vars, jobs, steps, runner, secrets
+# other_contexts: env, vars, jobs, steps, runner, secrets
