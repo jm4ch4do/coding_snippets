@@ -38,7 +38,7 @@ steps:
     # alternative syntax
     run: find dist/assets/*.js -type f -execdir echo '::set-output name=script-file::{}' ';'
 
-# to use in a different file
+# to use in a different workflow
   - name: Output file name
     run: echo ${{ needs.build.outputs.script-file }}
 
