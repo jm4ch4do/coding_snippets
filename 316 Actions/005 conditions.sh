@@ -5,7 +5,7 @@
 # ------------------------------- JOB LEVEL CONDITION ------------------------------
 # Print data if any job failed
 report:
-  if: failure()
+  if: failure()                         # condition
   needs: [lint, deploy]
   runs-on: ubuntu-latest
   steps:
@@ -21,7 +21,7 @@ report:
   id: run-test  # sets id for target step
   run: npm run test
 - name: Upload test report
-  if: failure() && steps.run-test.outcome == 'failure'
+  if: failure() && steps.run-test.outcome == 'failure'  # condition
   uses: actions/upload-artifact@v4
   with:
     name: test-report

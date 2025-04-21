@@ -36,7 +36,7 @@ jobs:
       MONGODB_USERNAME: my_user_uat
 
 # USE 2 - Define at step level
-# is also possible to use at step level but not very practical
+# is also possible to use at step useful for avoiding injection
 - name: Step with its own env
   env:
     STEP_VAR: "I'm step-specific"
