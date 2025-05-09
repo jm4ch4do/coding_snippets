@@ -1,0 +1,12 @@
+name: First Workflow
+on: workflow_dispatch  # workflow can be triggered manually
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print greeting
+        run: echo "Hello World"
+      - name: Print Multiple lines
+        run: |
+            echo "First output"
+            echo "Second output"
