@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest        
     services:
       mongodb:                    # name of service
-        image: mongo              # oficial docker image
+        image: mongo              # official docker image
         env: 
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
@@ -49,9 +49,9 @@ jobs:
 
 
 # --------------------------------------- EVENTS ---------------------------------------
-# events specify when workflow is triggered
-on: workflow_dispatch  # triggered manually
-on: push  # when pushing (most common usage)
+# events specify when a workflow is triggered
+on: workflow_dispatch     # triggered manually
+on: push                  # when pushing (most common usage)
 
 # events for repos
 on: [pull_request, create, fork, issues, issue_comment, watch]  
@@ -70,8 +70,8 @@ on:
       - 'release/**'
     paths:             # filter
       - '**.js'
-    pull_request:      # event
-      types:           # activity type (these are actually the default values)
-        - opened
-        - reopened
-        - synchronized
+  pull_request:      # event
+    types:           # activity type (these are actually the default values)
+      - opened
+      - reopened
+      - synchronized

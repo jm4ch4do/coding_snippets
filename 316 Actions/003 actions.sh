@@ -29,7 +29,7 @@
 # ------------------------------------- OUTPUTS ---------------------------------------
 # actions that output values
 outputs:
-    script-file: ${{ steps.publish.outputs.script-file}}  # retrieves variable "script-file" from step "publish"
+    script-file: ${{ steps.publish.outputs.script-file }}  # retrieves variable "script-file" from step "publish"
 steps:
   - name: Publish JS filename
     id: publish

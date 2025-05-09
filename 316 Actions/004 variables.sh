@@ -16,14 +16,14 @@ steps:
     run: echo "${{ github.server_url }}/${{ github.repository }}"
 
 
-# ------------------------------ EXAMPLE OF SECRETS CONTEXT ----------------------------
+# -------------------------- EXAMPLE OF CONFIGURATION VARIABLES ------------------------
 # Secrets and variables stored in github can be retrieved
 # using the "secrets" and "vars" contexts
 run: echo "My secret is ${{ secrets.MY_SECRET }}"
 run: echo "My variable is ${{ vars.MY_VARIABLE }}"
 
 
-# ----------------------------------- ENV VARIABLES AND SECRETS -----------------------------------
+# ----------------------------- ENV VARIABLES AND SECRETS ------------------------------
 # You can also create variables in the workflow code, they are stored in the env context
 # They will appear as exported in the runner's console
 

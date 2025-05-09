@@ -17,7 +17,7 @@
 
 
 # -------------------------------- COMPOSITE ACTIONS ----------------------------------
-# Is the simplest type of custom action since it combines steps and doesn't do programming
+# Is the simplest type of custom action. It combines shell commands and actions
 
 # .github/action/my_action.yml
 name: Say Hello Composite Action
