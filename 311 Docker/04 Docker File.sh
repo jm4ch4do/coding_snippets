@@ -1,111 +1,61 @@
-"------------------------DOCKER FILE-------------------------"
-# Docker files are used to build images
+# -------------------------------------- SIMPLE DOCKER FILE -------------------------------------
+# Docker files are used to build images. Simple structure is as follows:
+FROM ubuntu                                 # base image
+RUN apt-get update                          # runs update command
+RUN apt-get -y install nginx                # runs install command
+COPY index.nginx-debian.html /var/www/html  # copies web page to inside image
+CMD ["nginx", "-g", "daemon off;"]          # starts nginx as default command
+CMD nginx -g 'daemon off'                   # alternative, passes command to shell instead of directly to process
+                                            # (not recommended)
+>> docker build .                           # builds images using cmd in the same folder where the Dockerfile is
 
 
-"-----------EXAMPLE ENTRY POINT WITH DEFAULT VALUE------------"
-FROM Ubuntu
-
-ENTRYPOINT ["sleep"]
-
-CMD ["5"]
+# ------------------------------------------- FORMAT --------------------------------------------
+FROM base_image                             # the first instruction must alwasy be a FROM pointing to base image
+INSTRUCTION arguments                       # A Dockerfile always follows this format
+INSTRUCTION arguments                       # Any instruction can follow the initial FROM
 
 
-docker ubuntu-sleeper     # uses default value
-docker ubuntu-sleeper 10  # replace default value 
-docker run --entrypoint new-command ubuntu-sleeper 10  # overwrites the entrypoint
+# ------------------------------------------ COMMANDS -------------------------------------------
+# filesystem                        
+WORKDIR /root/demo                          # sets the working dir for any RUN, CMD, ENTRYPOINT, COPY and ADD
+WORKDIR some_folder                         # you can set workdir multiple times in the file to change it for following instructions
+                                            # you can specify a relative path that will be appended to previous workdir
+COPY copy.txt /tmp                          # copies from source to destination
+ADD add.txt  /tmp                           # also copies from source to destination and also can extract into destination
+ADD http:/example.com/big.tar.xz /tmp       # allows copying from url and directly extract into destination
+                                            # (the url part is not recommended), use curl instead
+USER nginx                                  # switches to an specific user
+
+# info
+LABEL maintainer="you@example.com"          # adds key-value metadata to image
+EXPOSE 8080                                 # informs that the container listens on a port (documentation purpose)
+                                            # shown in "docker ps" and "docker inspect"
+                                            # if you actually want to expose ports you have to use the -p option
 
 
-"------------------------EXAMPLE JAVA-------------------------"
-# Create New Docker Image (starting JAVA server)
-vim Dockerfile
-    FROM node:12.22.1-alpine3.11  # using parent image from dockerhub
-    
-    WORKDIR /app  # sets the working directory. Every command after this will be exec in this folder
-    COPY . .  # copia todos los archivos en el folder del DockerFile para /app dentro del contenedor
-    RUN yarn install --production  # compilar código de node
-    
-    CMD ["node", "/app/src/index.js"]  # execute the index.js everytime to do run on the container
-
-docker build .
+# healthcheck (can also be used as parameter of "docker run")
+HEALTHCHECK check_to_perform                # docker will display the label healhtly if checks are passing
+HEALTCHECK CMD ping -c 1 172.17.0.2         # health check consists of pinging another container                                  
+HEALTHCHECK CMD curl -f http://localhost/   # checks if local web is responsive
+--start-period=0s, --retries=3              # default values for parameters.  
+--interval=30s,                             # time between running checks
+--timeout=30s,                              # max time a check can run
 
 
-"--------------------EXAMPLE RUN ON LINUX---------------------"
-# simple example of run
-vim Dockerfile
-FROM python:3.8-alpine
-    RUN apk add --update vim  # install VIM when creating container
-docker build -t hola-python  # it creates the image
+# shell commands                           
+RUN apt-get update                          # executes command. Can be used multiple times
+ENTRYPOINT ["python", "app.py"]             # sets the image's main command, but is intended to not be overriden like CMD
+                                            # if you try to override it like CMD, the instruction will be appended instead
+CMD ["nginx", "-g", "daemon off;"]          # can be overrided
+docker run nginx sleep 10                   # overrides cmd
+docker run --entrypoint /bin/sh myimage     # overrides entrypoint
+docker run --entrypoint echo myimage Hello  # when using both CMD becomes appended to entrypoint
 
 
-"--------------------EXAMPLE FLASK---------------------"
-FROM Ubuntu
-
-RUN apt-get update
-RUN apt-get install python
-
-RUN pip install flask
-RUN pip install flask-mysql
-
-COPY . /opt/source-code
-
-ENTRYPOINT FLASK_APP=/opt/source-code/app.py flask run
-
-"--------------------EXAMPLE CMD PYTHON---------------------"
-# CMD is used to execute a file everytime you start the container
-vim Dockerfile
-    FROM python:3.8-alpine
-    RUN apk add -update vim
-    WORKDIR /usr/src/myapp
-    
-    COPY . .
-    CMD ["python", "/usr/src/myapp/server.py"]
-docker build -t hola-python  # creates the image
-
-docker run -p 8080:8080 hola-python  # creates and starts the container using port 8080
-
-# you can also overwrite the CMD command
-# for example, you an just overwrite it with a sh (shell) which practically does nothing
-# now when you start the container it won't run the python server anymore
-docker run -p 8080:8080 hola-python sh
-
-
-"--------------------EXAMPLE CMD NODE---------------------"
-nano Dockerfile
-    FROM node:alpine
-    COPY . /app
-    WORKDIR /app
-    CMD node app.js
-docker build -t hello-docker .
-
-
-"--------------------EXAMPLE ENTRYPOINT---------------------"
-# requires an input and is not conceived to be overwritten.
-vim Dockerfile
-    ...
-    ENTRYPOINT [ "python" ]
-    
-# this won't work because is passing the input to Python inside the container
-docker run -p 8080:8080 hola-python sh
-
-# but this will work and execute the instructions within the file
-docker run hola-python hello.py
-
-
-"--------------------COPY & ADD---------------------" 
-# ---------- COPY or ADD
-# ADD allow to pull files from remote locations
-# also ADD automatically decompresses files when moving .tar or .zip files
-
-
-"-------RECOMMENDED DOCKERFILE GOOD PRACTICES-------"
-# some tips from a Docker  Conference
-FROM debian:use_tag
-RUN apt-get update && \
-    apt-get -y install --no-install-recommends \
-    openjdk-8-jdf \
-    && rm -rf /var/lib/apt/lists/*  
-    
-# command1 && command2 : command2 is only executed if command1 returns ans exit status of zero
-# --no-install-recommends : is for avoiding installing extra packages
-# && rm -rf /var/lib/apt/lists/* : deletes files used in the installation
-
+# variables                                    
+ENV NGINX 1.2                               # sets an environment variable
+docker run --env NGINX 1.3 my-web-app       # you can override the env variables when running the container
+ARG VERSION=1.0.0                           # defines a variables not exposed in the environment
+RUN echo "Installing version $VERSION"      # way to use both ENV and ARG in the Dockerfile 
+docker build --build-arg VERSION=2.0.1 -t myapp:2.0.1 .  # variables can be passed at build time

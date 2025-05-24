@@ -1,4 +1,4 @@
-"------------------------BASIC-------------------------"
+# ------------------------ BASIC -------------------------
 # DevOps or Site Realiability Engineer
 
 # -> The basic Docker structure is Linux -> Container Engine -> Docker Container
@@ -11,3 +11,6 @@
 docker version
 docker --version
 docker-compose version
+
+# docker image registry
+https://hub.docker.com

@@ -1,0 +1,1 @@
+1. You can identify a container by the long UUID, the short ID version (12 characters) or the name of the container
