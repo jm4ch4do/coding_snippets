@@ -1,50 +1,52 @@
-"------------------------BASIC-------------------------"
-# create/remove
+# --------------------------------------- BASIC NETWORKING --------------------------------------
+# view
 docker network ls                 # list networks
-docker network create my-network  # create docker network
-docker network rm my-network      # remove network
-
-# connect/disconnect
-docker network connect	# Connect a container to a network
-docker network disconnect	# Disconnect a container from a network
 docker network inspect	my-network  # Display detailed information on a host or network
 
-# start container inside a network
+# connect
 docker run -it --network my-network nicolaka/netshoot
+docker network connect net1 vm1	  # Connect a container to a network
+docker network disconnect <network-name> <container-name>
 
-# DNS SERVER
-# The internal DNS server for Docker always runs in the address 172.17.0.11
-
-
-"------------------------NEW NETWORK-------------------------"
-docker network create \
-    --driver bridge \
-    --subnet 182.18.0.0/16
+# create/remove
+docker network create my-network  # create docker network (defaults to bridge and 172.17.0.1)
+docker network rm my-network      # remove network
+docker network create \           # specifies driver and subnet
+    --network bridge \            # internal DNS always runs in the address 172.17.0.11
+    --subnet 182.18.0.0/16        # (only for user define networks)
     my-new-network
 
+# network alias
+docker network create my-network  # network aliases are only available in user-defined networks
+docker run -d --name my-container --network my-network --network-alias my-alias nginx  # alias
+docker run -it --rm --network my-network busybox ping my-alias  # pings alias inside network
+                                  # --rm indicates the container will be removed after usage
+                                  # alias is adding a new entry in the DNS besides the name of container
 
-"------------------------DRIVERS-------------------------"
-# bridge:  internal network where usually docker is 172.17.0.1 
-# and the others get .2, .3 and so on
-# you can map ports from the host machine to any container in this network
-docker run ubuntu  # is assigned by default to the Bridge Network
-
-
-# host:    every container uses your own ip address
-# now ports from ubuntu are automatically mapped to your machine
-# now you cannot have several containers working with the same port
-# since you don't have the mapping tool to switch to different ports in the localhost
-docker run ubuntu --network=host  # assign to host network
-
-# none:    containers are isolated having no access to any other container or network
-docker run ubuntu --network=none  # assign to none network
+# legacy for default brigde network for alias is to define alias within host
+docker container run -dt --link container1:my-alias --name container2 busybox sh
 
 
-# overlay: allows different networks to communicate
-# macvlan: allows assigning macs to containers
+# -------------------------------------------- DRIVERS ------------------------------------------
+# BRIDGE: internal network with default gateway is 172.17.0.1 and containers get .2, .3 and so on
+#         you can map ports from the host machine to any container in this network.
+#         containers can communicate with each other
+
+# BRIDGE: (USER DEFINED) Has a DNS running at ip .11. Provides better network isolation and network aliases.
 
 
-"------------------------EXAMPLE-------------------------"
+# HOST:    every container uses your own ip address. There is only one host network that cannot be deleted.
+#          ports from containers are automatically mapped to your machine
+#          you cannot have several containers working with the same port.
+#          used to monitor network since interface is shared with host (vpn, firewall, monitoring)
+
+# NONE:    Disables networking entirely
+# OVERLAY: Used for multi-host networking (Docker Swarm)
+# MACVLAN: Assigns a MAC address to each container, appearing as a physical device in the network
+# IPVLAN   Similar to Macvlan, but more advanced control over L2/L3.
+
+
+# -------------------------------------------- EXAMPLE ------------------------------------------
 # SQL DATABASE INSIDE NETWORK
 docker run -d \
     --network todo-app --network-alias mysql \  # new container is known as mysql inside the network
@@ -53,22 +55,3 @@ docker run -d \
     -e MYSQL_DATABASE=todos \  # set environment variable for database_name
     mysql:5.7  # this specific mysql container allows certain environment variables
 docker exec -it e384a21b6d7d mysql -p  # opens mysql inside the container
-
-
-"------------------------BRIDGE EXAMPLE-------------------------"
-# when you run a new container, it automatically gets assigned to the default docker
-# network which is a bridge type
-docker run --rm -d --name nginx -p 80:80 nginx
-docker inspect nginx
-
-# hosts in this network get their IP assigned by the docker DHCP server and they
-# don't allow name resolution which makes this a bad scenario for deployment
-
-
-"------------------------NETWORK TROUBLE SHOOTING-------------------------"
-docker run --name netshoot --rm -it --network my_network nicolaka/netshoot /bin/bash
-
-
-"------------------EXAMPLE WITH 5 CONTAINERS-----------------"
-
-

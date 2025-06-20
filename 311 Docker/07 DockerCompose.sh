@@ -1,34 +1,48 @@
-"---------------------DOCKER COMPOSE---------------------"
+# ---------------------------------------- DOCKER COMPOSE ---------------------------------------
 # Docker compose offers an easy way of creating containers avoiding long lines using the RUN command
 # A new network is created automatically for the new containers everytime you use Docker Compose
 
 
-"------------------EXAMPLES APP AND MYSQL-----------------"
-VIM docker-compose.yml
+# ------------------------------------------ COMMANDS -------------------------------------------
+# run
+docker compose config                 # verify if format is correct
+docker compose up -d                  # run file in detach mode (assumes default name docker-compose.yml)
+docker compose -f custom_name.yml up  # set custom name
+docker compose down                   # removes created containers and networks
 
-version: "3.7"  # version of docker compose
 
+# --------------------------------------- BASIC STRUCTURE ---------------------------------------
 services:
+  webserver:
+    image: nginx
+  database:
+    image: redis
 
-  app: 
-    image: pablokbs/getting-started:v1
-    ports:
-      - 3000:3000
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: secret
-      MYSQL_DB: todos
-      
-  mysql:
+
+# --------------------------------------- EXTENDED EXAMPLE --------------------------------------
+services:
+  db: 
     image: mysql:5.7
-    volumes:
-      - ./mysql-data:/var/lib/mysql
+    volumnes:
+      - db_data:/var/lib/mysql
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: todos
-
-docker-compose up -d  # run file in detach mode (background)
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_DB: wordpress
+      
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - "8080:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
 
 
 "------------------EXAMPLE WITH 5 CONTAINERS-----------------"

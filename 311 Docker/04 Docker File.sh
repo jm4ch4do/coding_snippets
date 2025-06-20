@@ -46,16 +46,16 @@ HEALTHCHECK CMD curl -f http://localhost/   # checks if local web is responsive
 # shell commands                           
 RUN apt-get update                          # executes command. Can be used multiple times
 ENTRYPOINT ["python", "app.py"]             # sets the image's main command, but is intended to not be overriden like CMD
-                                            # if you try to override it like CMD, the instruction will be appended instead
+                                            # if you try to override it with CMD, the instruction will be appended instead
 CMD ["nginx", "-g", "daemon off;"]          # can be overrided
 docker run nginx sleep 10                   # overrides cmd
 docker run --entrypoint /bin/sh myimage     # overrides entrypoint
-docker run --entrypoint echo myimage Hello  # when using both CMD becomes appended to entrypoint
+docker run --entrypoint echo myimage Hello  # when using both, CMD becomes appended to entrypoint
 
 
 # variables                                    
 ENV NGINX 1.2                               # sets an environment variable
 docker run --env NGINX 1.3 my-web-app       # you can override the env variables when running the container
-ARG VERSION=1.0.0                           # defines a variables not exposed in the environment
+ARG VERSION=1.0.0                           # defines an internal variable which not exposed as env var
 RUN echo "Installing version $VERSION"      # way to use both ENV and ARG in the Dockerfile 
 docker build --build-arg VERSION=2.0.1 -t myapp:2.0.1 .  # variables can be passed at build time

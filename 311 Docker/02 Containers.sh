@@ -30,6 +30,7 @@ docker container start billin  # new syntax
 # Advanced Run
 # you may specify internal and external ports and name
 docker run -p 80:80 -p 8080:8080 --name billingapp sotobotero/udemy-devops:0.0.1
+docker run -P nginx            # Publish all exposed ports from the container to random ports in host
 
 
 # --------------------------------------------- ENTER ---------------------------------------------

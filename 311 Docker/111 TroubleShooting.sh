@@ -1,6 +1,6 @@
 "------------------------TROUBLE SHOOTING-------------------------"
 # Verify if any process is using port 80
-netstat -aon | findstr :80
+netstat -ntlp  # see all processes using ports
 
 ps fax  # view running processes
 ps  # also shows process but doesn't show ports

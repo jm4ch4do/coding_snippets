@@ -14,3 +14,7 @@ docker-compose version
 
 # docker image registry
 https://hub.docker.com
+
+# access remote
+ssh -i docker_rsa root@198.211.108.206
+curl -I 198.211.108.206:80
