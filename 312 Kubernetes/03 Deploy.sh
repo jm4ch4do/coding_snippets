@@ -1,18 +1,35 @@
-"-------------------------------DEPLOYMENT-----------------------------"
-# deployments are used to have replicas of the same pod
-# inside the deployment you can create a Replica Set
-# where you can place any number of pods to be replicated as a unit
-
-# commands for new deployment, see all, view details, delete
-k create deployment nginx-deployment --image=nginx 
-k get deployments
-k describe deployment nginx-deployment
-k delete deployment nginx-deployment
+# ---------------------------------------- DEPLOYMENTS --------------------------------------------
+# a deployment provides extra feature on top of replicasets such as: rolling updates, rollbacks and versioning.
+# when doing a deployment, a new replicaset is creaded while the old one is still in place
+# once the new one is stable, the old one is deleted. 
+# Similarly, a rollback to the old one can be made if new one has bugs
 
 
-# number of replicas
-k scale deployment nginx-deployment --replicas=5  # increase to 5
-k scale deployment nginx-deployment --replicas=3  # decrease to 3
+# ------------------------------------------ COMMANDS ---------------------------------------------
+# create/delete
+kubectl apply -f my-dep.yaml                              # recommended approach     
+kubectl deployment demo-deployment --image=nginx --replicas 3
+kubectl delete deployment demo-deployment
+
+# scale
+kubectl scale deployment nginx-deployment --replicas=5    # increase to 5
+kubectl scale deployment nginx-deployment --replicas=3    # decrease to 3
+
+# view
+kubectl get deployments
+kubectl describe deployments my-deployment                # has info on how changes happened
+kubectl rollout history deployment.v1.apps/my-deployment  # views history of changes in deployment   
+kubectl rollout history deployment.v1.apps/my-deployment --revision 1  # details of revision 1
+
+# maxSurge: maximun number of pods that can be started above the original number of pods (default 25%)
+# maxUnavailable: maximun number of pods that an be unavailable during the update (default 25%)
+
+
+
+
+
+
+
 
 
 
@@ -36,11 +53,6 @@ k expose deployment k8s-web-hello --type=NodePort  --port=3000
 k expose deployment k8s-web-hello --type=LoadBalancer  --port=3000
 
 
-# list of services, details, delete
-k get services
-k describe service nginx-deployment
-k delete service nginx-deployment
-
 
 
 "-----------------------------DEPLOY UPDATE---------------------------"
@@ -61,3 +73,22 @@ k set image deployment k8s-web-hello k8s-web-hello=m4ch4do/k8s-web-hello
 
 
 
+
+# ---------------------------------------- EXAMPLE YAML -------------------------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kplabs-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: php-redis
+        image: nginx
