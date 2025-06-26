@@ -1,4 +1,4 @@
-# ----------------------------------- USER ACCESS -----------------------------------
+# ------------------------------------------- USER ACCESS -------------------------------------------
 IAM (Identitiy and Access Management)  # global service (doesn't depend on region)
 Users  # One root user, the rest are IAM users with limited permissions
 Groups  # users can be in multiple groups, groups cannot contain other groups
@@ -10,8 +10,7 @@ Roles  # are like groups but they contain permissions for non-user access.
        # example: you can give an ec2 instance permission to access s3 bucket.
 
 
-
-
-
-S3  # Object storage (files, images, backups) but not applications or OS
-    # Data remains even if EC2 is deleted, not instant access but optimize for large-scale
+# -------------------------------------------- S3 STORAGE -------------------------------------------
+S3  # Simple Storage Service
+    # Object storage (files, images, backups) but not applications or OS
+    # Data remains even if EC2 is deleted, not instant access but optimized for large-scale
