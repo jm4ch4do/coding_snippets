@@ -8,9 +8,3 @@ UI, Console, SDK(api)  # are the three ways to access aws services
 Alias  # you can set for any user for easier access
 Roles  # are like groups but they contain permissions for non-user access.
        # example: you can give an ec2 instance permission to access s3 bucket.
-
-
-# -------------------------------------------- S3 STORAGE -------------------------------------------
-S3  # Simple Storage Service
-    # Object storage (files, images, backups) but not applications or OS
-    # Data remains even if EC2 is deleted, not instant access but optimized for large-scale

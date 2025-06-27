@@ -94,7 +94,7 @@ ELB                            # Elastic Load Balancer: Do health checks to EC2s
 - Network LB                   # ultra-high performance, allows for TCP (Layer 4), Static IP through Elastic IP
 - Gateway LB                   # Gateway Load Balancer (Layer 3), one usage is for having a DMZ, intrussion detection or deep packet inspection.
 
-ASG                            # AutoScaling Groups enable adding and removing EC2 instances accoding to load
+ASG                            # AutoScaling Groups enable adding and removing EC2 instances according to load
                                # Automatically register instances to a load balancer, also replaces unhealthy instances
 - Settings
   * Minimun Size
