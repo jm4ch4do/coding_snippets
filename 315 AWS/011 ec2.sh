@@ -55,7 +55,7 @@ EC2 Image Builder              # automates image build (to a schedule or to when
                                # it includes creation and instanciation
 
 
-# --------------------------------------- EC2 STORAGE ---------------------------------------
+# ------------------------------------------- EC2 STORAGE --------------------------------------------
 EBS                            # Elastic Block Store. Default storage choice in UI. (kind of a "network USB stick") 
                                # Is a network drive that can be attached/dettached and persisted independently. 
                                # So, information can stay in the drive even after vm is terminated. (Detele on Termination=False) 
@@ -78,3 +78,32 @@ EFS Infrequent Access          # cost-optimized for files that are not accessed 
 FSs                            # 3rd party file systems on AWS
                                # FSx for Windows File Server
                                # FSx for Lustre (Linux + cluster). High performance computing like machine learning
+
+
+# ----------------------------------- LOAD BALANCING & AUTO SCALING ----------------------------------
+# Scalability: ability to accommodate a larger load:
+#              - Vertical scalability means increasing the size of the instance (scale up)
+#              - Horizontal scalability means deploying more instances (scale out).
+
+# Elasticity: means the system can scale based on the load (auto-scaling).
+
+
+ELB                            # Elastic Load Balancer: Do health checks to EC2s and balances traffic
+                               # Is a managed load balancer, you just need to configure a few things
+- Application LB               # HTTP/HTTPS/ gRPC only (Layer 7), static DNS
+- Network LB                   # ultra-high performance, allows for TCP (Layer 4), Static IP through Elastic IP
+- Gateway LB                   # Gateway Load Balancer (Layer 3), one usage is for having a DMZ, intrussion detection or deep packet inspection.
+
+ASG                            # AutoScaling Groups enable adding and removing EC2 instances accoding to load
+                               # Automatically register instances to a load balancer, also replaces unhealthy instances
+- Settings
+  * Minimun Size
+  * Desired Capacity
+  * Maximum Size
+
+- Dynamical Strategies
+  * Simple/Step Scaling        # When a CloudWatch alarm is triggered (example CPU > 70%), then add 2 units
+                               # When a CloudWatch alarm is triggered (example CPU < 30%), then remove 2 units
+  * TargetTracking Scaling     # Example: I want the average ASG CPU to stay around 40%
+  * Scheduled Scaling          # Example: Increase the min capacity to 10 EC2s at 5pm on Friday (for betting sites)
+- Predictive Scaling         # Uses machine learning to predict future traffic ahead of time based on history
