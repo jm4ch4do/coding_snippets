@@ -41,9 +41,14 @@ Secret Manager                   # Stores secrets and you can force rotation of 
 AWS Artifact                     # Provides access to AWS compliance documentation and AWS agreements. Use for internal audit or compliance.
 
 
-
-
-
+# ------------------------------------------- ADVANCED IDENTITY --------------------------------------
+STS (Security_Token_Service)     # Creates short-term credentials with limited-privileges to access your AWS resources.
+Cognito                          # Allows user creation for mobile and web apps. It integrates looging with facebook, google, email.
+AWS Directory Services
+  Managed Active Directory       # Create your own AD in AWS, manage users. Can establish trust connections with your own premise AD. 
+  AD Connector                   # Directory Gateway to redirect to on-premise AD.
+  Simple AD                      # AD-compatible managed on AWS but cannot be joined with on-premise-AD.
+IAM Identity Center              # Provides a single login for all defined AWS accounts.
 
 
 
